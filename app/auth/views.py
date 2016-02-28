@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, url_for, flash
 from flask.ext.login import login_user, logout_user, login_required,  current_user
 from . import auth
 from ..models import User
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, ChangePasswordForm
 from .. import db
 from ..email import send_email
 
@@ -79,3 +79,18 @@ def resend_confirmation():
     send_email(current_user, u'AWoter注册确认', 'auth/email/confirm', user=current_user, token=token)
     flash(u'一封新的确认邮件已发送，请查收！')
     return redirect(url_for('main.index'))
+
+
+@auth.route('/changepassword', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    title = u'修改密码'
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = form.password.data
+        db.session.add(current_user)
+        db.session.commit()
+        flash(u'您的密码已修改，请牢记新密码！')
+        return redirect(url_for('main.index'))
+    return render_template('auth/changepassword.html', title=title, form=form)
+

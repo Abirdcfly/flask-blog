@@ -29,3 +29,10 @@ class RegistrationForm(Form):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError(u'此用户名已注册！')
+
+
+class ChangePasswordForm(Form):
+    password = PasswordField(u'新密码', validators=[Required(), Length(1, 64),
+                                               Regexp('^[A-Za-z0-9_]*$', 0, u'密码只能包含大小写字母数字和下划线')])
+    password2 = PasswordField(u'确认密码', validators=[Required(), EqualTo('password', message=u'两次密码需要一致')])
+    submit = SubmitField(u'确定')
