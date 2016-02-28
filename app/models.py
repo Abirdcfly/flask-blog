@@ -6,12 +6,37 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 
 
+class Permission:
+    FOLLOW = 0X01
+    COMMIT = 0X02
+    WRITE_ARTICLES = 0X04
+    MODERATE_COMMENTS = 0X08
+    ADMINISTER = 0X80
+
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     users = db.relationship('User', backref='role', lazy='dynamic')
 
+    @staticmethod
+    def insert_roles():
+        roles = {
+            'User': (Permission.FOLLOW |
+                     Permission.COMMIT |
+                     Permission.WRITE_ARTICLES, True)
+            'Moderator': (Permission.FOLLOW |
+                          Permission.COMMIT |
+                          Permission.WRITE_ARTICLES |
+                          Permission.MODERATE_COMMENTS, False)
+            'Administrator': (0xff, False)
+        }
+        for r in roles:
+            role = Role.query.filter_by(name=r).first()
+            if role is None:
+                role = Role(name=r)
+            role.permissions = roles[r][0]
+            role.default
     def __repr__(self):
         return '<Role %r>' % self.name
 
@@ -24,6 +49,8 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    default = db.Column(db.Boolean, default=False, index=True)
+    permission = db.Column(db.Integer)
 
     @property
     def password(self):
