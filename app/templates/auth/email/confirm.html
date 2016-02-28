@@ -1,0 +1,9 @@
+<p>Dear {{ user.username }},</p>
+<p>欢迎加入 <b>AWoter</b>!</p>
+<p>为确认您的账户，请点击下面的链接： <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">请点击这里</a>.</p>
+<p>您也可以复制下面的地址到浏览器地址栏打开:</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+<p>请在2小时内点击此链接，过期无效！</p>
+<p>致敬,</p>
+<p>AWoter团队</p>
+<p><small>注意：此邮件为自动发送，请勿回复此邮件。</small></p>

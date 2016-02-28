@@ -1,0 +1,15 @@
+Dear {{ user.username }},
+
+欢迎加入AWoter
+
+为确认您的账户，请将下面的链接复制到网址栏打开：
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+请在2小时内点击此链接，过期无效！
+
+致敬,
+
+AWoter团队
+
+注意：此邮件为自动发送，请勿回复此邮箱。
