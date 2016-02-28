@@ -22,7 +22,6 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
-    title = u'主页'
     logout_user()
     flash(u'你已退出登录！')
-    return redirect(url_for('main.index'), title=title)
+    return redirect(url_for('main.index'))
