@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, url_for, flash
 from flask.ext.login import login_user, logout_user, login_required,  current_user
 from . import auth
 from ..models import User
-from .forms import LoginForm, RegistrationForm, ChangePasswordForm
+from .forms import LoginForm, RegistrationForm, ChangePasswordForm, ChangeEmailForm
 from .. import db
 from ..email import send_email
 
@@ -81,7 +81,7 @@ def resend_confirmation():
     return redirect(url_for('main.index'))
 
 
-@auth.route('/changepassword', methods=['GET', 'POST'])
+@auth.route('/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
     title = u'修改密码'
@@ -92,5 +92,22 @@ def change_password():
         db.session.commit()
         flash(u'您的密码已修改，请牢记新密码！')
         return redirect(url_for('main.index'))
-    return render_template('auth/changepassword.html', title=title, form=form)
+    return render_template('auth/change-password.html', title=title, form=form)
 
+
+@auth.route('/change-email', methods=['GET', 'POST'])
+@login_required
+def change_email():
+    title = u'修改邮箱'
+    form = ChangeEmailForm()
+    if current_user.confirmed == True:
+        if form.validate_on_submit():
+            current_user.email = form.email.data
+            db.session.add(current_user)
+            db.session.commit()
+            flash(u'您的邮箱地址已修改，请牢记！')
+            return redirect(url_for('main.index'))
+    else:
+        flash(u'请先确认您的原邮箱地址！')
+        return redirect(url_for('auth.unconfirmed'))
+    return render_template('auth/change-email.html', title=title, form=form)

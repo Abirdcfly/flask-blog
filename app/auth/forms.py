@@ -36,3 +36,8 @@ class ChangePasswordForm(Form):
                                                Regexp('^[A-Za-z0-9_]*$', 0, u'密码只能包含大小写字母数字和下划线')])
     password2 = PasswordField(u'确认密码', validators=[Required(), EqualTo('password', message=u'两次密码需要一致')])
     submit = SubmitField(u'确定')
+
+
+class ChangeEmailForm(Form):
+    email = StringField(u'新邮箱', validators=[Required(), Length(1, 64), Email()])
+    submit = SubmitField(u'确定')
