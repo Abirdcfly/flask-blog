@@ -111,3 +111,12 @@ def change_email():
         flash(u'请先确认您的原邮箱地址！')
         return redirect(url_for('auth.unconfirmed'))
     return render_template('auth/change-email.html', title=title, form=form)
+
+
+@auth.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.ping()
+        if not current_user.confirmed \
+                and request.endpoint[:5] != 'auth.':
+            return redirect(url_for('auth.unconfirmed'))

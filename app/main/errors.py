@@ -15,4 +15,8 @@ def internal_server_error(e):
     return render_template('500.html', title=title), 500
 
 
+@main.app_errorhandler(403)
+def forbidden(e):
+    title = u'403 权限错误！'
+    return render_template('403.html', title=title), 403
 

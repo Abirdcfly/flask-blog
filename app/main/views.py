@@ -6,6 +6,7 @@ from ..email import send_email
 from . import main
 from .forms import NameForm
 from flask.ext.login import login_required
+from flask import abort
 
 
 @main.route('/about')
@@ -38,8 +39,17 @@ def index():
     return render_template('index.html', title=title, form=form, name=session.get('name'),
                            known=session.get('known', False))
 
+#
+# @main.route('/secret')
+# @login_required
+# def secret():
+#     return u'您必须登陆！'
 
-@main.route('/secret')
-@login_required
-def secret():
-    return u'您必须登陆！'
+
+@main.route('/user/<username>')
+def user_page(username):
+    title = str(username)
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    return render_template('user.html', user=user, title=title)
