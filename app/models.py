@@ -9,11 +9,11 @@ from datetime import datetime
 
 
 class Permission:
-    FOLLOW = 0X01
-    COMMIT = 0X02
-    WRITE_ARTICLES = 0X04
-    MODERATE_COMMENTS = 0X08
-    ADMINISTER = 0X80
+    FOLLOW = 0x01
+    COMMENT = 0x02
+    WRITE_ARTICLES = 0x04
+    MODERATE_COMMENTS = 0x08
+    ADMINISTER = 0x80
 
 
 class Role(db.Model):
@@ -28,10 +28,10 @@ class Role(db.Model):
     def insert_roles():
         roles = {
             'User': (Permission.FOLLOW |
-                     Permission.COMMIT |
+                     Permission.COMMENT |
                      Permission.WRITE_ARTICLES, True),
             'Moderator': (Permission.FOLLOW |
-                          Permission.COMMIT |
+                          Permission.COMMENT |
                           Permission.WRITE_ARTICLES |
                           Permission.MODERATE_COMMENTS, False),
             'Administrator': (0xff, False)
@@ -58,8 +58,6 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
-    default = db.Column(db.Boolean, default=False, index=True)
-    permission = db.Column(db.Integer)
     nickname = db.Column(db.String(64))
     # 昵称
     location = db.Column(db.String(64))

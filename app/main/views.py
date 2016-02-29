@@ -1,12 +1,13 @@
 # -*- coding:utf-8 -*-
 from flask import render_template, session, redirect, url_for, flash, current_app
 from .. import db
-from ..models import User
+from ..models import User, Role
 from ..email import send_email
 from . import main
-from .forms import NameForm
-from flask.ext.login import login_required
+from .forms import NameForm, EditProfileForm, EditProfileAdminForm
+from flask.ext.login import login_required, current_user
 from flask import abort
+from ..decorators import admin_required
 
 
 @main.route('/about')
@@ -49,7 +50,52 @@ def index():
 @main.route('/user/<username>')
 def user_page(username):
     title = str(username)
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first_or_404()
     if user is None:
         abort(404)
     return render_template('user.html', user=user, title=title)
+
+
+@main.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    title = u'修改个人信息'
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.nickname = form.nickname.data
+        current_user.location = form.location.data
+        current_user.about_me = form.about_me.data
+        db.session.add(current_user)
+        flash(u'您的修改已经保存')
+        return redirect(url_for('.user_page', username=current_user.username))
+    form.nickname.data = current_user.nickname
+    form.location.data = current_user.location
+    form.about_me.data = current_user.about_me
+    return render_template('edit-profile.html', title=title, form=form, username=current_user.username)
+
+
+@main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_profile_admin(id):
+    user = User.query.get_or_404(id)
+    form = EditProfileAdminForm(user=user)
+    if form.validate_on_submit():
+        user.email = form.email.data
+        user.username = form.username.data
+        user.confirmed = form.confirmed.data
+        user.role = Role.query.get(form.role.data)
+        user.nickname = form.nickname.data
+        user.location = form.location.data
+        user.about_me = form.about_me.data
+        db.session.add(user)
+        flash(u'数据已经更新！')
+        return redirect(url_for('.user', username=user.username))
+    form.email.data = user.email
+    form.username.data = user.username
+    form.confirmed.data = user.confirmed
+    form.role.data = user.role_id
+    form.nickname.data = user.nickname
+    form.location.data = user.location
+    form.about_me.data = user.about_me
+    return render_template('edit-profile.html', form=form, user=user)
