@@ -26,15 +26,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-{#                <li><a href="{{ url_for('doc.html') }}">文章</a></li>#}
-{#                <li><a href="{{ url_for('res-mods.html') }}">插件</a></li>#}
-{#                <li><a href="{{ url_for('hd.html') }}">活动</a></li>#}
-{#                <li><a href="{{ url_for('video.html') }}">视频</a></li>#}
-{#                <li><a href="{{ url_for('about.html') }}">关于</a></li>#}
-                <li><a href="\doc.html">文章</a></li>
-                <li><a href="\res-mods.html">插件</a></li>
-                <li><a href="\hd.html">活动</a></li>
-                <li><a href="\video.html">视频</a></li>
+                <li><a href="{{ url_for('main.doc') }}">文章</a></li>
+                <li><a href="{{ url_for('main.res_mods') }}">插件</a></li>
+                <li><a href="{{ url_for('main.hd') }}">活动</a></li>
+                <li><a href="{{ url_for('main.video') }}">视频</a></li>
                 <li><a href="{{ url_for('main.about') }}">关于</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
