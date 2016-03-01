@@ -49,8 +49,8 @@ def index():
 
 @main.route('/user/<username>')
 def user_page(username):
-    title = str(username)
     user = User.query.filter_by(username=username).first_or_404()
+    title = str(user.username)
     if user is None:
         abort(404)
     return render_template('user.html', user=user, title=title)
@@ -90,7 +90,7 @@ def edit_profile_admin(id):
         user.about_me = form.about_me.data
         db.session.add(user)
         flash(u'数据已经更新！')
-        return redirect(url_for('.user', username=user.username))
+        return redirect(url_for('.user_page', username=user.username))
     form.email.data = user.email
     form.username.data = user.username
     form.confirmed.data = user.confirmed
