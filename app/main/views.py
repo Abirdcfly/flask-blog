@@ -161,3 +161,23 @@ def doc_detail(id):
     title = apost.article_title
     body_show = True
     return render_template('doc.html', title=title, posts=[apost], body_show=body_show)
+
+
+@main.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_doc(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author:
+    # and not current_user.can(Permission.ADMINISTER):
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.article_title = form.article_title.data
+        post.body = form.body.data
+        db.session.add(post)
+        flash(u'修改已保存')
+        return redirect(url_for('main.doc', id=post.id,
+                                title=post.article_title, posts=[post], body_show=True))
+    form.article_title = post.article_title
+    form.body.data = post.body
+    return render_template('post.html', form=form)
