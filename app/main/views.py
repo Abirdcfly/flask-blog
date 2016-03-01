@@ -49,6 +49,7 @@ def index():
 
 @main.route('/user/<username>')
 def user_page(username):
+    body_show = False
     user = User.query.filter_by(username=username).first_or_404()
     title = str(user.username)
     if user is None:
@@ -58,7 +59,8 @@ def user_page(username):
         page, per_page=current_app.config['AWOTER_DOC_PER_PAGE'],
         error_out=False)
     posts = pagination.items
-    return render_template('user.html', user=user, title=title, posts=posts, pagination=pagination)
+    return render_template('user.html', user=user, title=title,
+                           posts=posts, pagination=pagination, body_show=body_show)
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -126,12 +128,13 @@ def post():
 @main.route('/doc')
 def doc():
     title = u'文章列表'
+    body_show = False
     page = request.args.get('page', 1, type=int)
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config['AWOTER_DOC_PER_PAGE'],
         error_out=False)
     posts = pagination.items
-    return render_template('doc.html', title=title, posts=posts, pagination=pagination)
+    return render_template('doc.html', title=title, posts=posts, pagination=pagination, body_show=body_show)
 
 
 @main.route('/res-mods')
@@ -150,3 +153,11 @@ def hd():
 def video():
     title = u'视频'
     return render_template('video.html', title=title)
+
+
+@main.route('/doc/<int:id>')
+def doc_detail(id):
+    apost = Post.query.get_or_404(id)
+    title = apost.article_title
+    body_show = True
+    return render_template('doc.html', title=title, posts=[apost], body_show=body_show)
