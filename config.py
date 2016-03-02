@@ -1,5 +1,5 @@
 import os
-# basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
@@ -41,7 +41,6 @@ class ProductionConfig(Config):
                           % (SAE_MYSQL_USER, SAE_MYSQL_PASS,
                              SAE_MYSQL_HOST_M, SAE_MYSQL_PORT, SAE_MYSQL_DB)
 
-
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
@@ -71,5 +70,6 @@ config = {
     'testing': TestingConfig,
     'production': ProductionConfig,
 
-    'default': DevelopmentConfig
+    # 'default': DevelopmentConfig
+    'default': ProductionConfig
 }
