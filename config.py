@@ -1,7 +1,6 @@
+# -*- coding:utf-8 -*-
 import os
-# import .sae
-from sae.const import (SAE_MYSQL_USER, SAE_MYSQL_PASS,
-                             SAE_MYSQL_HOST_M, SAE_MYSQL_PORT, SAE_MYSQL_DB)
+import sae.const
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -41,8 +40,8 @@ class ProductionConfig(Config):
     # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
     #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
     SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
-                          % (SAE_MYSQL_USER, SAE_MYSQL_PASS,
-                             SAE_MYSQL_HOST_M, SAE_MYSQL_PORT, SAE_MYSQL_DB)
+                          % (sae.const.MYSQL_USER, sae.const.MYSQL_PASS,
+                             sae.const.MYSQL_HOST, int(sae.const.MYSQL_PORT), sae.const.MYSQL_DB)
 
     @classmethod
     def init_app(cls, app):
