@@ -25,17 +25,20 @@
                 {% endif %}
             </div>
             {% endif %}
-            {% if current_user == post.author %}
             <div class="post-footer">
-            <a href="{{ url_for('main.edit_doc', id=post.id) }}">
+            {% if current_user == post.author %}
+                <a href="{{ url_for('main.edit_doc', id=post.id) }}">
                 <span class="label label-primary">编辑</span>
-            </a>
+                </a>
             {% elif current_user.is_administrator() %}
-            <a href="{{ url_for('main.edit_doc', id=post.id) }}">
+                <a href="{{ url_for('main.edit_doc', id=post.id) }}">
                 <span class="label label-danger">编辑[Admin]</span>
+                </a>
+            {% endif %}
+            <a href="{{ url_for('main.doc', id=post.id) }}#comments">
+                <span class="label label-primary">{{ post.comments.count() }} 评论</span>
             </a>
             </div>
-            {% endif %}
         </div>
     </li>
     {% endfor %}

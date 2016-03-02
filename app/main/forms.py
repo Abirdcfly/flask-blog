@@ -5,6 +5,7 @@ from wtforms.validators import Required, Length, Email, Regexp
 from ..models import Role, User
 from flask.ext.pagedown.fields import PageDownField
 
+
 class NameForm(Form):
     name = StringField(u'账号', validators=[Required()])
     password = PasswordField(u'密码', validators=[Required()])
@@ -48,5 +49,10 @@ class EditProfileAdminForm(Form):
 class PostForm(Form):
     article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 128)])
     body = PageDownField(u"请输入内容", validators=[Required()])
+    submit = SubmitField(u'提交')
+
+
+class CommentForm(Form):
+    body = PageDownField(u"评论", validators=[Required()])
     submit = SubmitField(u'提交')
 

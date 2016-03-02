@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
+{% if detail_show == True %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% endif %}
 
 {% block page_content %}
 {% if current_user.is_authenticated %}
@@ -17,9 +20,22 @@
     </ul>
 {% include '_doc.html' %}
 </div>
+{% if detail_show == True %}
+    <h4 id="comments">评论</h4>
+    {% if current_user.can(Permission.COMMENT) %}
+    <div class="comment-form">
+        {{ wtf.quick_form(form) }}
+    </div>
+    {% endif %}
+    {% include '_comments.html' %}
+{% endif %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.doc') }}
+    {% if detail_show == False %}
+        {{ macros.pagination_widget(pagination, 'main.doc') }}
+    {% else %}
+        {{ macros.pagination_widget(pagination, 'main.doc', fragment='#comments', id=posts[0].id) }}
+    {% endif %}
 </div>
 {% endif %}
 {% endblock %}

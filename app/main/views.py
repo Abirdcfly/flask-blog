@@ -2,10 +2,10 @@
 from flask import render_template, session, redirect, url_for, \
     flash, current_app, request, make_response
 from .. import db
-from ..models import User, Role, Permission, Post
+from ..models import User, Role, Permission, Post, Comment
 from ..email import send_email
 from . import main
-from .forms import NameForm, EditProfileForm, EditProfileAdminForm, PostForm
+from .forms import NameForm, EditProfileForm, EditProfileAdminForm, PostForm, CommentForm
 from flask.ext.login import login_required, current_user
 from flask import abort
 from ..decorators import admin_required, permission_required
@@ -44,7 +44,7 @@ def index():
 
 @main.route('/user/<username>')
 def user_page(username):
-    body_show = False
+    detail_show = False
     user = User.query.filter_by(username=username).first_or_404()
     title = str(user.username)
     if user is None:
@@ -55,7 +55,7 @@ def user_page(username):
         error_out=False)
     posts = pagination.items
     return render_template('user.html', user=user, title=title,
-                           posts=posts, pagination=pagination, body_show=body_show)
+                           posts=posts, pagination=pagination, detail_show=detail_show)
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -122,7 +122,7 @@ def post():
 @main.route('/doc')
 def doc():
     title = u'文章列表'
-    body_show = False
+    detail_show = False
     show_follwed = False
     if current_user.is_authenticated:
         show_follwed = bool(request.cookies.get('show_followed', ''))
@@ -136,7 +136,7 @@ def doc():
         error_out=False)
     posts = pagination.items
     return render_template('doc.html', title=title, posts=posts,
-                           pagination=pagination, body_show=body_show, show_follwed=show_follwed)
+                           pagination=pagination, detail_show=detail_show, show_follwed=show_follwed)
 
 
 @main.route('/res-mods')
@@ -157,12 +157,27 @@ def video():
     return render_template('video.html', title=title)
 
 
-@main.route('/doc/<int:id>')
+@main.route('/doc/<int:id>', methods=['GET', 'POST'])
 def doc_detail(id):
     post = Post.query.get_or_404(id)
     title = post.article_title
-    body_show = True
-    return render_template('doc.html', title=title, posts=[post], body_show=body_show)
+    detail_show = True
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(body=form.body.data, post=post, author=current_user._get_current_object())
+        db.session.add(comment)
+        flash(u'你的评论已提交！')
+        return redirect(url_for('main.doc_detail', id=post.id, page=-1))
+    page = request.args.get('page', 1, type=int)
+    if page == -1:
+        page = (post.comments.count() - 1) / \
+            current_app.config['AWOTER_COMMENTS_PER_PAGE'] + 1
+    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['AWOTER_COMMENTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+    return render_template('doc.html', title=title, posts=[post], detail_show=detail_show,
+                           form=form, comments=comments, pagination=pagination)
 
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
@@ -179,7 +194,7 @@ def edit_doc(id):
         db.session.add(post)
         flash(u'修改已保存')
         return redirect(url_for('main.doc', id=post.id,
-                                title=post.article_title, posts=[post], body_show=True))
+                                title=post.article_title, posts=[post], detail_show=True))
     form.article_title = post.article_title
     form.body.data = post.body
     return render_template('post.html', form=form)
@@ -265,3 +280,39 @@ def show_followed():
     resp = make_response(redirect(url_for('main.doc')))
     resp.set_cookie('show_followed', '1', max_age=30*24*60*60)
     return resp
+
+
+@main.route('/moderate')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def moderate():
+    title = u'管理评论'
+    page = request.args.get('page', 1, type=int)
+    pagination = Comment.query.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['AWOTER_COMMENTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+    return render_template('moderate.html', comments=comments, title=title,
+                           page=page, pagination=pagination)
+
+
+@main.route('/moderate/enable/<int:id>')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def moderate_enable(id):
+    comment = Comment.query.get_or_404(id)
+    comment.disabled = False
+    db.session.add(comment)
+    return redirect(url_for('.moderate',
+                            page=request.args.get('page', 1, type=int)))
+
+
+@main.route('/moderate/disable/<int:id>')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def moderate_disable(id):
+    comment = Comment.query.get_or_404(id)
+    comment.disabled = True
+    db.session.add(comment)
+    return redirect(url_for('.moderate',
+                            page=request.args.get('page', 1, type=int)))
