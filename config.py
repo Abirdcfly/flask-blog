@@ -14,6 +14,7 @@ class Config:
     AWOTER_MAIL_SENDER = 'AWoter Admin <fp544037857@gmail.com>'
     AWOTER_ADMIN = os.environ.get('AWOTER_ADMIN')
     AWOTER_DOC_PER_PAGE = 20
+    AWOTER_FOLLOWERS_PER_PAGE = 20
 
     @staticmethod
     def init_app(app):
