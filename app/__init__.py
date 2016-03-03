@@ -40,3 +40,14 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app
+
+app = Flask(__name__)
+@app.before_first_request
+def recreate_test_databases(engine = None, session = None):
+  if engine == None:
+    engine = db.engine
+  if session == None:
+    session = db.session
+
+  Base.metadata.drop_all(bind=engine)
+  Base.metadata.create_all(bind=engine)
