@@ -37,7 +37,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         token = user.generate_confirmation_token()
-        send_email(user.email, u'AWoter注册确认', 'auth/email/confirm', user=user, token=token)
+        send_email(user.email, u'WOTER注册确认', 'auth/email/confirm', user=user, token=token)
         flash(u'确认邮件已发送，请查收！')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
@@ -76,7 +76,7 @@ def unconfirmed():
 @login_required
 def resend_confirmation():
     token = current_user.generate_confirmation_token()
-    send_email(current_user, u'AWoter注册确认', 'auth/email/confirm', user=current_user, token=token)
+    send_email(current_user, u'WOTER注册确认', 'auth/email/confirm', user=current_user, token=token)
     flash(u'一封新的确认邮件已发送，请查收！')
     return redirect(url_for('main.index'))
 

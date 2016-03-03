@@ -5,7 +5,7 @@ from app.models import User, Role, Permission, Post, Follow, Comment
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
-app = create_app(os.getenv('AWOTER_CONFIG') or 'default')
+app = create_app(os.getenv('WOTER_CONFIG') or 'default')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
@@ -25,6 +25,7 @@ def test():
 
 
 @manager.command
+# @app.before_first_request
 def deploy():
     """Run deployment tasks."""
     from flask.ext.migrate import upgrade
@@ -40,5 +41,13 @@ def deploy():
     User.add_self_follows()
 
 
+# @app.before_first_request
+# def create_database():
+#     db.create_all()
+
+# create_database()
+
 if __name__ == '__main__':
-    manager.run()
+    # create_database()
+    # db.create_all()
+    manager.run(debug=True)

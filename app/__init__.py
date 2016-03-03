@@ -13,6 +13,7 @@ moment = Moment()
 db = SQLAlchemy()
 pagedown = PageDown()
 
+
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
@@ -30,6 +31,8 @@ def create_app(config_name):
     login_manager.init_app(app)
     pagedown.init_app(app)
 
+    # db.create_all()
+    # db.session.commit()
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 

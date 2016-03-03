@@ -18,7 +18,11 @@ def about():
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    title = 'Home'
+    # try:
+    #     db.create_all()
+    # except:
+    #     pass
+    # title = 'Home'
     form = NameForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.name.data).first()
@@ -26,8 +30,8 @@ def index():
             user = User(username=form.name.data)
             db.session.add(user)
             session['known'] = False
-            if current_app.config['AWOTER_ADMIN']:
-                send_email(current_app.config['AWOTER_ADMIN'], U'新用户加入',
+            if current_app.config['WOTER_ADMIN']:
+                send_email(current_app.config['WOTER_ADMIN'], U'新用户加入',
                            'mail/new_user', user=user)
         else:
             session['known'] = True
@@ -51,7 +55,7 @@ def user_page(username):
         abort(404)
     page = request.args.get('page', 1, type=int)
     pagination = user.posts.order_by(Post.timestamp.desc()).paginate(
-        page, per_page=current_app.config['AWOTER_DOC_PER_PAGE'],
+        page, per_page=current_app.config['WOTER_DOC_PER_PAGE'],
         error_out=False)
     posts = pagination.items
     return render_template('user.html', user=user, title=title,
@@ -132,7 +136,7 @@ def doc():
         query = Post.query
     page = request.args.get('page', 1, type=int)
     pagination = query.order_by(Post.timestamp.desc()).paginate(
-        page, per_page=current_app.config['AWOTER_DOC_PER_PAGE'],
+        page, per_page=current_app.config['WOTER_DOC_PER_PAGE'],
         error_out=False)
     posts = pagination.items
     return render_template('doc.html', title=title, posts=posts,
@@ -171,9 +175,9 @@ def doc_detail(id):
     page = request.args.get('page', 1, type=int)
     if page == -1:
         page = (post.comments.count() - 1) / \
-            current_app.config['AWOTER_COMMENTS_PER_PAGE'] + 1
+            current_app.config['WOTER_COMMENTS_PER_PAGE'] + 1
     pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
-        page, per_page=current_app.config['AWOTER_COMMENTS_PER_PAGE'],
+        page, per_page=current_app.config['WOTER_COMMENTS_PER_PAGE'],
         error_out=False)
     comments = pagination.items
     return render_template('doc.html', title=title, posts=[post], detail_show=detail_show,
@@ -240,7 +244,7 @@ def followers(username):
         return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
     pagination = user.followers.paginate(
-        page, per_page=current_app.config['AWOTER_FOLLOWERS_PER_PAGE'],
+        page, per_page=current_app.config['WOTER_FOLLOWERS_PER_PAGE'],
         error_out=False)
     follows = [{'user': item.follower, 'timestamp': item.timestamp}
                for item in pagination.items]
@@ -257,7 +261,7 @@ def followed_by(username):
         return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
     pagination = user.followed.paginate(
-        page, per_page=current_app.config['AWOTER_FOLLOWERS_PER_PAGE'],
+        page, per_page=current_app.config['WOTER_FOLLOWERS_PER_PAGE'],
         error_out=False)
     follows = [{'user': item.followed, 'timestamp': item.timestamp}
                for item in pagination.items]
@@ -289,7 +293,7 @@ def moderate():
     title = u'管理评论'
     page = request.args.get('page', 1, type=int)
     pagination = Comment.query.order_by(Comment.timestamp.asc()).paginate(
-        page, per_page=current_app.config['AWOTER_COMMENTS_PER_PAGE'],
+        page, per_page=current_app.config['WOTER_COMMENTS_PER_PAGE'],
         error_out=False)
     comments = pagination.items
     return render_template('moderate.html', comments=comments, title=title,
@@ -316,3 +320,8 @@ def moderate_disable(id):
     db.session.add(comment)
     return redirect(url_for('.moderate',
                             page=request.args.get('page', 1, type=int)))
+
+
+# @app.before_first_request
+# def create_database():
+#     db.create_all()
