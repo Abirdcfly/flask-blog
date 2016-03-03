@@ -8,7 +8,7 @@ class Config:
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    MAIL_USE_TLS = True
+    MAIL_USE_TLS = False
 
     # google mail for development
 
@@ -25,7 +25,7 @@ class Config:
     WOTER_MAIL_SUBJECT_PREFIX = '[WOTER]'
     WOTER_MAIL_SENDER = 'WOTER Admin <fp544037857@gmail.com>'
     WOTER_ADMIN = os.environ.get('WOTER_ADMIN')
-    
+
     WOTER_DOC_PER_PAGE = 20
     WOTER_FOLLOWERS_PER_PAGE = 30
     WOTER_COMMENTS_PER_PAGE = 30
