@@ -30,6 +30,8 @@ class Config:
     WOTER_FOLLOWERS_PER_PAGE = 30
     WOTER_COMMENTS_PER_PAGE = 30
 
+    SQLALCHEMY_POOL_RECYCLE = 10
+
     @staticmethod
     def init_app(app):
         pass
