@@ -34,10 +34,10 @@ def register():
     title = u'注册'
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data, username=form.username.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        db.session.close()
+        # user = User(email=form.email.data, username=form.username.data, password=form.password.data)
+        # db.session.add(user)
+        # db.session.commit()
+        # db.session.close()
         token = user.generate_confirmation_token()
         # send_email(user.email, u'WOTER注册确认', 'auth/email/confirm', user=user, token=token)
         flash(u'确认邮件已发送，请查收！')
