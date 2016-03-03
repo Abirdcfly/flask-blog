@@ -38,7 +38,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         token = user.generate_confirmation_token()
-        send_email(user.email, u'WOTER注册确认', 'auth/email/confirm', user=user, token=token)
+        # send_email(user.email, u'WOTER注册确认', 'auth/email/confirm', user=user, token=token)
         flash(u'确认邮件已发送，请查收！')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
