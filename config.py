@@ -30,7 +30,9 @@ class Config:
     WOTER_FOLLOWERS_PER_PAGE = 30
     WOTER_COMMENTS_PER_PAGE = 30
 
-    SQLALCHEMY_POOL_RECYCLE = 10
+    SQLALCHEMY_POOL_RECYCLE = 5
+    SQLALCHEMY_ECHO = True
+
 
     @staticmethod
     def init_app(app):
@@ -55,30 +57,29 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
                           % (sae.const.MYSQL_USER, sae.const.MYSQL_PASS,
                              sae.const.MYSQL_HOST, int(sae.const.MYSQL_PORT), sae.const.MYSQL_DB)
-    print "hahahaha", sae.const.MYSQL_USER, sae.const.MYSQL_PASS, sae.const.MYSQL_HOST, int(sae.const.MYSQL_PORT), sae.const.MYSQL_DB
 
-    @classmethod
-    def init_app(cls, app):
-        Config.init_app(app)
-
-        # email errors to the administrators
-        import logging
-        from logging.handlers import SMTPHandler
-        credentials = None
-        secure = None
-        if getattr(cls, 'MAIL_USERNAME', None) is not None:
-            credentials = (cls.MAIL_USERNAME, cls.MAIL_PASSWORD)
-            if getattr(cls, 'MAIL_USE_TLS', None):
-                secure = ()
-        mail_handler = SMTPHandler(
-            mailhost=(cls.MAIL_SERVER, cls.MAIL_PORT),
-            fromaddr=cls.WOTER_MAIL_SENDER,
-            toaddrs=[cls.WOTER_ADMIN],
-            subject=cls.WOTER_MAIL_SUBJECT_PREFIX + ' Application Error',
-            credentials=credentials,
-            secure=secure)
-        mail_handler.setLevel(logging.ERROR)
-        app.logger.addHandler(mail_handler)
+    # @classmethod
+    # def init_app(cls, app):
+    #     Config.init_app(app)
+    #
+    #     # email errors to the administrators
+    #     import logging
+    #     from logging.handlers import SMTPHandler
+    #     credentials = None
+    #     secure = None
+    #     if getattr(cls, 'MAIL_USERNAME', None) is not None:
+    #         credentials = (cls.MAIL_USERNAME, cls.MAIL_PASSWORD)
+    #         if getattr(cls, 'MAIL_USE_TLS', None):
+    #             secure = ()
+    #     mail_handler = SMTPHandler(
+    #         mailhost=(cls.MAIL_SERVER, cls.MAIL_PORT),
+    #         fromaddr=cls.WOTER_MAIL_SENDER,
+    #         toaddrs=[cls.WOTER_ADMIN],
+    #         subject=cls.WOTER_MAIL_SUBJECT_PREFIX + ' Application Error',
+    #         credentials=credentials,
+    #         secure=secure)
+    #     mail_handler.setLevel(logging.ERROR)
+    #     app.logger.addHandler(mail_handler)
 
 
 config = {

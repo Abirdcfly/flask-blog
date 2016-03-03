@@ -34,15 +34,18 @@ def register():
     title = u'注册'
     form = RegistrationForm()
     if form.validate_on_submit():
-        # user = User(email=form.email.data, username=form.username.data, password=form.password.data)
-        # db.session.add(user)
-        # db.session.commit()
-        # db.session.close()
-        token = user.generate_confirmation_token()
+        user = User(email=form.email.data, username=form.username.data, password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        # token = user.generate_confirmation_token()
         # send_email(user.email, u'WOTER注册确认', 'auth/email/confirm', user=user, token=token)
         flash(u'确认邮件已发送，请查收！')
         # return redirect(url_for('auth.login'))
+        return redirect(url_for('main.index'))
     return render_template('auth/register.html', form=form, title=title)
+
+
+
 
 
 @auth.route('/confirm/<token>')
@@ -107,7 +110,6 @@ def change_email():
             current_user.email = form.email.data
             db.session.add(current_user)
             db.session.commit()
-            db.session.close()
             flash(u'您的邮箱地址已修改，请牢记！')
             return redirect(url_for('main.index'))
     else:
