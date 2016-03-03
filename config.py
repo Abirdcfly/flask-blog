@@ -5,20 +5,27 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
+
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    # MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_SERVER = 'smtp.sina.com'
-    # MAIL_PORT = 587
-    MAIL_PORT = 25
     MAIL_USE_TLS = True
+
+    # google mail for development
+
+    # MAIL_SERVER = 'smtp.googlemail.com'
+    # MAIL_PORT = 587
     # MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'fp544037857'
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'wotertk@sina.com'
     # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'otcccvkoridsepys'
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'fp19930816'
+
+    # sina mail for production
+    MAIL_SERVER = 'smtp.sina.com'
+    MAIL_PORT = 25
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'tk_woter@sina.com'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'xg8z4BWXJn'
     WOTER_MAIL_SUBJECT_PREFIX = '[WOTER]'
     WOTER_MAIL_SENDER = 'WOTER Admin <fp544037857@gmail.com>'
     WOTER_ADMIN = os.environ.get('WOTER_ADMIN')
+    
     WOTER_DOC_PER_PAGE = 20
     WOTER_FOLLOWERS_PER_PAGE = 30
     WOTER_COMMENTS_PER_PAGE = 30
