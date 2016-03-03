@@ -10,8 +10,8 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'fp544037857'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'otcccvkoridsepys'
     WOTER_MAIL_SUBJECT_PREFIX = '[WOTER]'
     WOTER_MAIL_SENDER = 'WOTER Admin <fp544037857@gmail.com>'
     WOTER_ADMIN = os.environ.get('WOTER_ADMIN')
