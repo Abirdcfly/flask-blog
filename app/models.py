@@ -59,7 +59,7 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role %r>' % self.name
-    
+
     def __init__(self):
         self.insert_roles(self)
 
