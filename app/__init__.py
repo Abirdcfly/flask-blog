@@ -30,7 +30,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     pagedown.init_app(app)
-
+    #db.create_all(app)
     # db.create_all()
     # db.session.commit()
     from .main import main as main_blueprint
@@ -39,15 +39,13 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+    with app.app_context():
+        # Extensions like Flask-SQLAlchemy now know what the "current" app
+        # is while within this block. Therefore, you can now run........
+        db.create_all()
     return app
 
-app = Flask(__name__)
-@app.before_first_request
-def recreate_test_databases(engine = None, session = None):
-  if engine == None:
-    engine = db.engine
-  if session == None:
-    session = db.session
 
-  Base.metadata.drop_all(bind=engine)
-  Base.metadata.create_all(bind=engine)
+# @app.before_first_request
+# def create_database():
+#     db.create_all()
