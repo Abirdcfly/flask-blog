@@ -30,5 +30,5 @@ def send_email(to, subject, template, **kwargs):
     m.subject = app.config['WOTER_MAIL_SUBJECT_PREFIX'] + ' ' + subject
     m.html = render_template(template + '.html', **kwargs)
     m.smtp = (app.config['MAIL_SERVER'], app.config['MAIL_PORT'], app.config['MAIL_USERNAME'],
-              app.config['MAIL_PASSWORD'], False)
+              app.config['MAIL_PASSWORD'], app.config['MAIL_USE_TLS'])
     m.send()
