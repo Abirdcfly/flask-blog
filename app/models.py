@@ -55,9 +55,13 @@ class Role(db.Model):
             role.default = roles[r][1]
             db.session.add(role)
         db.session.commit()
+        db.session.close()
 
     def __repr__(self):
         return '<Role %r>' % self.name
+    
+    def __init__(self):
+        self.insert_roles(self)
 
 
 class User(UserMixin, db.Model):
@@ -128,7 +132,7 @@ class User(UserMixin, db.Model):
                 self.role = Role.query.filter_by(default=True).first()
         if self.email is not None and self.avatar_hash is None:
             self.avatar_hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
-        # self.follow(self)
+        self.follow(self)
 
     def can(self, permissions):
         return self.role is not None and \
