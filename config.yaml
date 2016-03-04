@@ -71,4 +71,6 @@ libraries:
 - name: six
   version: "1.4.1"
 
-
+handlers:
+- url: /static
+  static_dir: path/to/app/static

@@ -63,20 +63,11 @@ if __name__ == '__main__':
     manager.run(debug=True)
 
 
-@app.before_request
-def deploy():
+@app.before_first_request
+def database_init():
     """Run deployment tasks."""
-    from flask.ext.migrate import upgrade
-    from app.models import Role, User
 
-    # migrate database to latest revision
-    # upgrade()
-
-    # create user roles
-    Role.insert_roles()
-
-    # create self-follows for all users
-    User.add_self_follows()
+    db.create_all()
 
 # def before_request():
 #     g.session = create_session()
@@ -86,3 +77,22 @@ def deploy():
 # def teardown_request(exception):
 #     g.session.close()
 #
+
+
+@app.before_request
+def deploy():
+    """Run deployment tasks."""
+    # from flask.ext.migrate import upgrade, init
+    from app.models import Role, User
+
+    # migrate database to latest revision
+    # if os.path.exists('./migrations'):
+    #     upgrade()
+    # else:
+    #     init()
+
+    # create user roles
+    Role.insert_roles()
+
+    # create self-follows for all users
+    User.add_self_follows()

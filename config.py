@@ -31,7 +31,9 @@ class Config:
     WOTER_COMMENTS_PER_PAGE = 30
 
     SQLALCHEMY_POOL_RECYCLE = 5
-    # SQLALCHEMY_ECHO = True
+
+    # debug mode
+    SQLALCHEMY_ECHO = True
 
 
     @staticmethod
