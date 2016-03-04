@@ -41,7 +41,7 @@ def create_app(config_name):
     with app.app_context():
         # Extensions like Flask-SQLAlchemy now know what the "current" app
         # is while within this block. Therefore, you can now run........
-        db.create_all()
+        # db.create_all()
         # deploy()
 
     return app
