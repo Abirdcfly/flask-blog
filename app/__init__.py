@@ -38,10 +38,10 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    with app.app_context():
-        # Extensions like Flask-SQLAlchemy now know what the "current" app
-        # is while within this block. Therefore, you can now run........
-        db.create_all()
+    # with app.app_context():
+    #     # Extensions like Flask-SQLAlchemy now know what the "current" app
+    #     # is while within this block. Therefore, you can now run........
+    #     db.create_all()
         # deploy()
 
     return app
