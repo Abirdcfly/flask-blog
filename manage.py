@@ -7,10 +7,10 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask import g
 
 
-if os.environ.get('APP_NAME') == None:
-    check = 'development'
-else:
-    check = 'production'
+# if os.environ.get('APP_NAME') == None:
+#     check = 'development'
+# else:
+#     check = 'production'
 
 app = create_app(os.getenv('WOTER_CONFIG') or 'production')
 manager = Manager(app)
@@ -69,11 +69,11 @@ if __name__ == '__main__':
     manager.run()
 
 
-@app.before_first_request
-def database_init():
-    """Run deployment tasks."""
-
-    db.create_all()
+# @app.before_first_request
+# def database_init():
+#     """Run deployment tasks."""
+#
+#     db.create_all()
 
 # def before_request():
 #     g.session = create_session()

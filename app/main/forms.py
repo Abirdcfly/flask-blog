@@ -6,6 +6,7 @@ from ..models import Role, User
 from flask.ext.pagedown.fields import PageDownField
 from .wysiwyg import WysiwygField
 
+
 class NameForm(Form):
     name = StringField(u'账号', validators=[Required()])
     password = PasswordField(u'密码', validators=[Required()])
