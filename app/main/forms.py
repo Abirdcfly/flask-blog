@@ -4,7 +4,7 @@ from wtforms import StringField, SubmitField, PasswordField, TextAreaField, Bool
 from wtforms.validators import Required, Length, Email, Regexp
 from ..models import Role, User
 from flask.ext.pagedown.fields import PageDownField
-
+from .wysiwyg import WysiwygField
 
 class NameForm(Form):
     name = StringField(u'账号', validators=[Required()])
@@ -47,8 +47,9 @@ class EditProfileAdminForm(Form):
 
 
 class PostForm(Form):
-    article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 128)])
-    body = PageDownField(u"请输入内容", validators=[Required()])
+    article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 64)])
+    # body = PageDownField(u'请输入内容', validators=[Required()])
+    body = WysiwygField(u"txteditor", validators=[Required()])
     submit = SubmitField(u'提交')
 
 

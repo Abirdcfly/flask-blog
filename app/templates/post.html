@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
+
 {% block page_content %}
 <div class="page-header">
-    <div class="col-md-8">
-        {{ wtf.quick_form(form) }}
+    <div class="row">
+        <div class="col-md-8">
+            {{ wtf.quick_form(form) }}
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -13,3 +16,4 @@
 {{ super() }}
     {{ pagedown.include_pagedown() }}
 {% endblock %}
+

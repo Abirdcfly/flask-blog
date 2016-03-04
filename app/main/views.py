@@ -122,6 +122,8 @@ def post():
         flash(u'已提交！')
         return redirect(url_for('.doc'))
     return render_template('post.html', title=title, form=form)
+    # return render_template('post-rich-text-edit.html', title=title, form=form)
+
 
 
 @main.route('/doc')

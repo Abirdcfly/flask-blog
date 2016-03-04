@@ -6,7 +6,13 @@ from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask import g
 
-app = create_app(os.getenv('WOTER_CONFIG') or 'default')
+
+if os.environ.get('APP_NAME') == None:
+    check = 'development'
+else:
+    check = 'production'
+
+app = create_app(os.getenv('WOTER_CONFIG') or check)
 manager = Manager(app)
 migrate = Migrate(app, db)
 
@@ -60,7 +66,7 @@ if __name__ == '__main__':
     # db.create_all()
     # manager.run({'deploy': deploy()})
     # manager.run({'fake': fake(100)})
-    manager.run(debug=True)
+    manager.run()
 
 
 @app.before_first_request
