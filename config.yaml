@@ -73,4 +73,4 @@ libraries:
 
 handlers:
 - url: /static
-  static_dir: path/to/app_awoter/static
+  static_dir: path/to/awoter/static
