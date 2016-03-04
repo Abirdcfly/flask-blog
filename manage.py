@@ -4,6 +4,7 @@ from app import create_app, db
 from app.models import User, Role, Permission, Post, Follow, Comment
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
+from flask import g
 
 app = create_app(os.getenv('WOTER_CONFIG') or 'default')
 manager = Manager(app)
@@ -41,6 +42,13 @@ def deploy():
     User.add_self_follows()
 
 
+@manager.command
+def fake(count):
+    from app.models import Post, User
+    User.generate_fake(count)
+    Post.generate_fake(count)
+
+
 # @app.before_first_request
 # def create_database():
 #     db.create_all()
@@ -50,4 +58,31 @@ def deploy():
 if __name__ == '__main__':
     # create_database()
     # db.create_all()
+    # manager.run({'deploy': deploy()})
+    # manager.run({'fake': fake(100)})
     manager.run(debug=True)
+
+
+@app.before_request
+def deploy():
+    """Run deployment tasks."""
+    from flask.ext.migrate import upgrade
+    from app.models import Role, User
+
+    # migrate database to latest revision
+    # upgrade()
+
+    # create user roles
+    Role.insert_roles()
+
+    # create self-follows for all users
+    User.add_self_follows()
+
+# def before_request():
+#     g.session = create_session()
+#
+#
+# @app.teardown_request
+# def teardown_request(exception):
+#     g.session.close()
+#

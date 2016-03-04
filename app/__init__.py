@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, current_app
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.mail import Mail
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -6,6 +6,7 @@ from config import config
 from flask.ext.login import LoginManager
 from flask.ext.moment import Moment
 from flask.ext.pagedown import PageDown
+
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -30,9 +31,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     pagedown.init_app(app)
-    #db.create_all(app)
-    # db.create_all()
-    # db.session.commit()
+
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
@@ -43,9 +42,26 @@ def create_app(config_name):
         # Extensions like Flask-SQLAlchemy now know what the "current" app
         # is while within this block. Therefore, you can now run........
         db.create_all()
+        # deploy()
+
     return app
 
 
 # @app.before_first_request
 # def create_database():
 #     db.create_all()
+
+#
+# def deploy():
+#     """Run deployment tasks."""
+#     from flask.ext.migrate import upgrade
+#     from app.models import Role, User
+#
+#     # migrate database to latest revision
+#     #upgrade()
+#
+#     # create user roles
+#     Role.insert_roles()
+#
+#     # create self-follows for all users
+#     User.add_self_follows()

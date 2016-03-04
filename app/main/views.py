@@ -16,6 +16,7 @@ def about():
     return render_template('about.html')
 
 
+@main.route('/index')
 @main.route('/', methods=['GET', 'POST'])
 def index():
     # try:
