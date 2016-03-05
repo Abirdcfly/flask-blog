@@ -63,7 +63,13 @@ class CommentForm(Form):
 
 
 # ckeditor 可用
-class PostForm(Form, CKEditor):
+class CkeditorPostForm(Form, CKEditor):
     article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 64)])
     body = TextAreaField(u"内容編輯", validators=[Required()])
+    submit = SubmitField(u'提交')
+
+
+class MarkdownPostForm(Form):
+    article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 64)])
+    body = PageDownField(u'请输入内容', validators=[Required()])
     submit = SubmitField(u'提交')

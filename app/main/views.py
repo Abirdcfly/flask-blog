@@ -5,7 +5,7 @@ from .. import db
 from ..models import User, Role, Permission, Post, Comment
 from ..email import send_email
 from . import main
-from .forms import NameForm, EditProfileForm, EditProfileAdminForm, PostForm, CommentForm
+from .forms import NameForm, EditProfileForm, EditProfileAdminForm, CkeditorPostForm, CommentForm, MarkdownPostForm
 from flask.ext.login import login_required, current_user
 from flask import abort
 from ..decorators import admin_required, permission_required
@@ -327,11 +327,11 @@ def moderate_disable(id):
 
 # Flask-CKEditor可用。图片，文件上传无效。
 # https://github.com/neo1218/flask-ckeditor
-@main.route('/post', methods=['GET', 'POST'])
+@main.route('/cpost', methods=['GET', 'POST'])
 @login_required
-def post():
+def ckeditor_post():
     title = u'编辑文章'
-    form = PostForm()
+    form = CkeditorPostForm()
     if current_user.can(Permission.WRITE_ARTICLES) and \
             form.validate_on_submit():
         posts = Post(article_title=form.article_title.data,
@@ -350,3 +350,19 @@ def ckupload():
     # response = form.upload(endpoint=app)
     # return response
     form.upload(endpoint=main)
+
+
+@main.route('/mpost', methods=['GET', 'POST'])
+@login_required
+def markdown_post():
+    title = u'编辑文章'
+    form = MarkdownPostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and \
+            form.validate_on_submit():
+        posts = Post(article_title=form.article_title.data,
+                     body=form.body.data,
+                     author=current_user._get_current_object())
+        db.session.add(posts)
+        flash(u'已提交！')
+        return redirect(url_for('.doc'))
+    return render_template('post.html', title=title, form=form)

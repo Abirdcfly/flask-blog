@@ -5,6 +5,41 @@
     min-height: 260px;
     margin-left: 280px;
 }
+body{
+    padding-top: 80px;
+    background-color: whitesmoke;
+}
+div.navbar-default {
+    background-color: #444444;
+
+}
+div.navbar-default a.navbar-brand{
+    color: silver
+}
+div.navbar-collapse ul.nav a{
+    color: silver
+}
+
+div.navbar-default a.navbar-brand:hover{
+    color: white;
+}
+div.navbar-collapse ul.nav>li>a:hover{
+    color: white;
+}
+div.navbar-collapse ul.nav li.dropdown ul.dropdown-menu{
+    background-color: #444444;
+}
+div.navbar-collapse>ul.nav>li.dropdown>ul.dropdown-menu>li>a{
+    color: #1abc9c;
+}
+/*div.navbar-collapse ul.nav li.dropdown button.btn a{*/
+    /*background-color: #444444;*/
+/*}*/
+blockquote {
+    background: #f2f3f1;
+    border-left: 10px solid gainsboro;
+}
+
 div.post-tabs {
     margin-top: 16px;
 }
