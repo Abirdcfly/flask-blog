@@ -202,7 +202,7 @@ def edit_doc(id):
         flash(u'修改已保存')
         return redirect(url_for('main.doc', id=post.id,
                                 title=post.article_title, posts=[post], detail_show=True))
-    form.article_title = post.article_title
+    form.article_title.data = post.article_title
     form.body.data = post.body
     return render_template('post.html', form=form)
 
