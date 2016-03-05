@@ -9,9 +9,9 @@
         <h3>{% if user.about_me %}{{ user.about_me }}{% endif %}</h3>
         {% if user.nickname or user.location %}
             <p>
-            {% if user.nickname %}昵称：{{ user.nickname }} {% endif %}
+            {% if user.nickname %}昵称： {{ user.nickname }} {% endif %}
             <br>
-            {% if user.location %}来自<a href="http://maps.baidu.com/?q={{ user.location }}">{{ user.location }}</a>
+            {% if user.location %}来自 <a href="http://maps.baidu.com/?q={{ user.location }}">{{ user.location }}</a>
             {% endif %}
             </p>
         {% endif %}
@@ -21,9 +21,9 @@
             {% endif %}
         </p>
         <p>
-            用户加入时间：{{ moment(user.member_since).format('L') }}
+            用户加入时间： {{ moment(user.member_since).format('L') }}
             <br>
-            上一次访问时间：{{ moment(user.last_seen).fromNow() }}
+            上一次访问时间： {{ moment(user.last_seen).fromNow() }}
         </p>
         <p>共发表文章{{ user.posts.count() }}篇</p>
         <p>
@@ -36,7 +36,7 @@
                 {% endif %}
             {% endif %}
             <a href="{{ url_for('main.followers', username=user.username) }}">关注者: <span class="badge">{{ user.followers.count() - 1 }}</span></a>
-            <a href="{{ url_for('main.followed_by', username=user.username) }}">他关注的人: <span class="badge">{{ user.followed.count() - 1 }}</span></a>
+            <a href="{{ url_for('main.followed_by', username=user.username) }}">  他关注的人: <span class="badge">{{ user.followed.count() - 1 }}</span></a>
             {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
             | <span class="label label-default">他关注着你</span>
             {% endif %}

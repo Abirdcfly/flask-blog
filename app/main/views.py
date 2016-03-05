@@ -194,7 +194,7 @@ def edit_doc(id):
     if current_user != post.author and \
             not current_user.can(Permission.ADMINISTER):
         abort(403)
-    form = PostForm()
+    form = MarkdownPostForm()
     if form.validate_on_submit():
         post.article_title = form.article_title.data
         post.body = form.body.data
