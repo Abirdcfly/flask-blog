@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
 
-class Config:
+class Config():
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
@@ -14,15 +14,7 @@ class Config:
     WOTER_FOLLOWERS_PER_PAGE = 30
     WOTER_COMMENTS_PER_PAGE = 30
 
-    MYSQL_USER = 'root'
-    MYSQL_PASS = 930816
-    MYSQL_HOST = 'localhost'
-    MYSQL_PORT = 3306
-    MYSQL_DB = 'app_awoter'
 
-    SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
-                          % (MYSQL_USER, MYSQL_PASS,
-                             MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
 
     @staticmethod
     def init_app(app):
@@ -31,6 +23,14 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    MYSQL_USER = 'root'
+    MYSQL_PASS = 930816
+    MYSQL_HOST = 'localhost'
+    MYSQL_PORT = 3306
+    MYSQL_DB = 'app_awoter'
+    SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
+                          % (MYSQL_USER, MYSQL_PASS,
+                             MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
     # google mail for development
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
@@ -53,6 +53,9 @@ class ProductionConfig(Config):
     MYSQL_HOST = sae.const.MYSQL_HOST
     MYSQL_PORT = int(sae.const.MYSQL_PORT)
     MYSQL_DB   = sae.const.MYSQL_DB
+    SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' \
+                          % (MYSQL_USER, MYSQL_PASS,
+                             MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
     # Sina mail for production.
     # Using SAE mail API
     MAIL_SERVER = 'smtp.sina.com'
