@@ -60,7 +60,7 @@ class ProductionConfig(Config):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'tk_woter@sina.com'
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'xg8z4BWXJn'
     # SAE only
-    SQLALCHEMY_POOL_RECYCLE = 5
+    SQLALCHEMY_POOL_RECYCLE = 10
     WOTER_ADMIN = 'fp544037857@gmail.com'
 
 config = {
