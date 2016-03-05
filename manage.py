@@ -7,12 +7,16 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask import g
 
 
-# if os.environ.get('APP_NAME') == None:
-#     check = 'development'
-# else:
-#     check = 'production'
+# reload(os.sys)
+# sys.setdefaultencoding('utf-8')
 
-app = create_app(os.getenv('WOTER_CONFIG') or 'production')
+
+if os.environ.get('APP_NAME') == None:
+    check = 'development'
+else:
+    check = 'production'
+
+app = create_app(os.getenv('WOTER_CONFIG') or check )
 manager = Manager(app)
 migrate = Migrate(app, db)
 

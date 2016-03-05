@@ -18,8 +18,10 @@
             </div>
             {% if detail_show %}
             <div class="post-body">
-                {% if post.body_html %}
-                {{ post.body_html | safe }}
+                {% if post.body %}
+{#                    {% if post.body_html %}#}
+{#                {{ post.body_html | safe }}#}
+                    {{ post.body |safe  }}
                 {% else %}
                 {{ post.body }}
                 {% endif %}

@@ -5,6 +5,8 @@ from wtforms.validators import Required, Length, Email, Regexp
 from ..models import Role, User
 from flask.ext.pagedown.fields import PageDownField
 from .wysiwyg import WysiwygField
+from flaskckeditor import CKEditor
+# from flask_wysiwyg.wysiwyg import WysiwygField
 
 
 class NameForm(Form):
@@ -32,7 +34,7 @@ class EditProfileAdminForm(Form):
     submit = SubmitField(u'确定修改')
 
     def __init__(self, user, *args, **kwargs):
-        super(EditProfileAdminForm,self).__init__(*args, **kwargs)
+        super(EditProfileAdminForm, self).__init__(*args, **kwargs)
         self.role.choices =[(role.id, role.name)for role in Role.query.order_by(Role.name).all()]
         self.user = user
 
@@ -47,14 +49,20 @@ class EditProfileAdminForm(Form):
             raise ValidationError(u'此用户名已注册！')
 
 
-class PostForm(Form):
-    article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 64)])
-    # body = PageDownField(u'请输入内容', validators=[Required()])
-    body = WysiwygField(u"txteditor", validators=[Required()])
-    submit = SubmitField(u'提交')
+# class PostForm(Form):
+#     article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 64)])
+#     # body = PageDownField(u'请输入内容', validators=[Required()])
+#     body = WysiwygField(u"内容編輯", validators=[Required()])
+#     submit = SubmitField(u'提交')
 
 
 class CommentForm(Form):
     body = PageDownField(u"评论", validators=[Required()])
     submit = SubmitField(u'提交')
 
+
+# ckeditor veision
+class PostForm(Form, CKEditor):
+    article_title = StringField(u'请输入标题', validators=[Required(), Length(1, 64)])
+    body = TextAreaField(u"内容編輯", validators=[Required()])
+    submit = SubmitField(u'提交')

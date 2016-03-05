@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div id='content'>
+    <div class='panel-body'>
+        <form method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.article_title(class='form-control', placeholder='Woter', type='text') }}
+                {{ form.body(class='ckeditor', placeholder='文件和图片上传暂时无效') }}
+                <script type="text/javascript">
+                    CKEDITOR.replace("body", {
+                        filebrowserUploadUrl: '/ckupload/',
+                        filebrowserImageUploadUrl: '/ckupload/'
+                    });
+                </script>
+                {{ form.submit(class="btn btn-default") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script  type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

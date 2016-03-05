@@ -108,21 +108,21 @@ def edit_profile_admin(id):
     return render_template('edit-profile.html', form=form, user=user)
 
 
-@main.route('/post', methods=['GET', 'POST'])
-@login_required
-def post():
-    title = u'编辑文章'
-    form = PostForm()
-    if current_user.can(Permission.WRITE_ARTICLES) and \
-            form.validate_on_submit():
-        posts = Post(article_title=form.article_title.data,
-                     body=form.body.data,
-                     author=current_user._get_current_object())
-        db.session.add(posts)
-        flash(u'已提交！')
-        return redirect(url_for('.doc'))
-    return render_template('post.html', title=title, form=form)
-    # return render_template('post-rich-text-edit.html', title=title, form=form)
+# @main.route('/post', methods=['GET', 'POST'])
+# @login_required
+# def post():
+#     title = u'编辑文章'
+#     form = PostForm()
+#     if current_user.can(Permission.WRITE_ARTICLES) and \
+#             form.validate_on_submit():
+#         posts = Post(article_title=form.article_title.data,
+#                      body=form.body.data,
+#                      author=current_user._get_current_object())
+#         db.session.add(posts)
+#         flash(u'已提交！')
+#         return redirect(url_for('.doc'))
+#     # return render_template('post.html', title=title, form=form)
+#     return render_template('post-rich-text-edit.html', title=title, form=form)
 
 
 
@@ -325,6 +325,28 @@ def moderate_disable(id):
                             page=request.args.get('page', 1, type=int)))
 
 
-# @app.before_first_request
-# def create_database():
-#     db.create_all()
+# using Flask-CKEditor
+# https://github.com/neo1218/flask-ckeditor
+@main.route('/post', methods=['GET', 'POST'])
+@login_required
+def post():
+    title = u'编辑文章'
+    form = PostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and \
+            form.validate_on_submit():
+        posts = Post(article_title=form.article_title.data,
+                     body=form.body.data,
+                     author=current_user._get_current_object())
+        db.session.add(posts)
+        flash(u'已提交！')
+        return redirect(url_for('.doc'))
+    return render_template('post-ckeditor.html', title=title, form=form)
+
+
+@main.route('/ckupload/', methods=['POST', 'OPTIONS'])
+def ckupload():
+    """file/img upload interface"""
+    form = PostForm()
+    # response = form.upload(endpoint=app)
+    # return response
+    form.upload(endpoint=main)

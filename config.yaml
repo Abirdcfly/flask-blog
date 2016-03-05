@@ -74,3 +74,6 @@ libraries:
 handlers:
 - url: /static
   static_dir: /app/static
+
+- url: /ckeditor
+  static_dir: /app/static/ckeditor
