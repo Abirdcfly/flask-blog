@@ -107,7 +107,8 @@ def edit_profile_admin(id):
     form.about_me.data = user.about_me
     return render_template('edit-profile.html', form=form, user=user)
 
-
+# 现在不能用。待我哪天细查代码
+# flask_wysiwyg
 # @main.route('/post', methods=['GET', 'POST'])
 # @login_required
 # def post():
@@ -123,7 +124,6 @@ def edit_profile_admin(id):
 #         return redirect(url_for('.doc'))
 #     # return render_template('post.html', title=title, form=form)
 #     return render_template('post-rich-text-edit.html', title=title, form=form)
-
 
 
 @main.route('/doc')
@@ -325,7 +325,7 @@ def moderate_disable(id):
                             page=request.args.get('page', 1, type=int)))
 
 
-# using Flask-CKEditor
+# Flask-CKEditor可用。图片，文件上传无效。
 # https://github.com/neo1218/flask-ckeditor
 @main.route('/post', methods=['GET', 'POST'])
 @login_required

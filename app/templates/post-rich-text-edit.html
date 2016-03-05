@@ -6,6 +6,7 @@
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prettify.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.css') }}">
+
 {#    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">#}
 {#    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">#}
 
@@ -32,9 +33,11 @@
 </div>
 {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-    <script  type="text/javascript" src="{{ url_for('static', filename='bootstrap-wysiwyg.js') }}"></script>
+{#{% block scripts %}#}
+{#{{ super() }}#}
+{#
+ <script  type="text/javascript" src="{{ url_for('static', filename='bootstrap-wysiwyg.js') }}"></script>
     <script  type="text/javascript" src="{{ url_for('static', filename='jquery.hotkeys.js') }}"></script>
     <script  type="text/javascript" src="{{ url_for('static', filename='prettify.js') }}"></script>
-{% endblock %}
+#}
+{#{% endblock %}#}
