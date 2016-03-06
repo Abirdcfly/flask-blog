@@ -33,7 +33,7 @@ div.navbar-collapse ul.nav li.dropdown ul.dropdown-menu{
     background-color: #444444;
 }
 div.navbar-collapse>ul.nav>li.dropdown>ul.dropdown-menu>li>a{
-    color: #1abc9c;
+    color: steelblue;
 }
 /*div.navbar-collapse ul.nav li.dropdown button.btn a{*/
     /*background-color: #444444;*/
