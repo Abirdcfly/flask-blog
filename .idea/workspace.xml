@@ -71,8 +71,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43914473">
-              <caret line="229" column="0" selection-start-line="229" selection-start-column="2" selection-end-line="229" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.32072368">
+              <caret line="145" column="14" selection-start-line="145" selection-start-column="14" selection-end-line="145" selection-end-column="14" />
               <folding>
                 <element signature="e#23#96#0" expanded="true" />
               </folding>
@@ -1207,8 +1207,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43914473">
-          <caret line="229" column="0" selection-start-line="229" selection-start-column="2" selection-end-line="229" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.32072368">
+          <caret line="145" column="14" selection-start-line="145" selection-start-column="14" selection-end-line="145" selection-end-column="14" />
           <folding>
             <element signature="e#23#96#0" expanded="true" />
           </folding>
