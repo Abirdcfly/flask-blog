@@ -393,10 +393,10 @@ def allowed_file(filename):
 
 
 import sae.const
-    access_key = sae.const.ACCESS_KEY
-    secret_key = sae.const.SECRET_KEY
-    appname = sae.const.APP_NAME
-    domain_name = "avatar"  #刚申请的domain
+access_key = sae.const.ACCESS_KEY
+secret_key = sae.const.SECRET_KEY
+appname = sae.const.APP_NAME
+domain_name = "avatar"  #刚申请的domain
 
 import sae.storage
 
