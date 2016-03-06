@@ -6,7 +6,7 @@
 {#    {% if user.avatar_local != None %}#}
     {% if aurl != None %}
 {#    <img class="img-rounded profile-thumbnail" src="{{ user.gavatar_local_url }}">#}
-        <img class="img-rounded profile-thumbnail" src="{{ aurl }}">
+        <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ aurl }}">
 {#        需修改 头像调整大小 二进制文件显示为图片#}
     {% else %}
     <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
