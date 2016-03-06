@@ -1,18 +1,10 @@
 {#{% extends "user.html" %}#}
-{%  extends "bootstrap/base.html" %}
-{##}
-{#{% block edit_avatar  %}#}
-{#    <form action="" method=post enctype=multipart/form-data>#}
-{#      <p><input type=file name=file>#}
-{#         <input type=submit value=Upload>#}
-{#    </form>#}
-{#{% endblock %}#}
+{%  extends "base.html" %}
+
 {% block content %}
-<!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
+    <p>注意：图片文件名不要超过30个字符！图片尽量不要太大。勿超过2MB！</p>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
-         <input type=submit value=Upload>
+         <input type=submit value='上传'>
     </form>
 {% endblock %}

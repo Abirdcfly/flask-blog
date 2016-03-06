@@ -88,8 +88,8 @@ class User(UserMixin, db.Model):
                                 backref=db.backref('followed', lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
-    # avatar_local = db.Column(db.LargeBinary(1024*1024))
-    # avatar_local_name = db.Column(db.String(128))
+    avatar_local = db.Column(db.LargeBinary(1024*1024))
+    avatar_local_url = db.Column(db.String(128))
 
     @property
     def password(self):
@@ -144,13 +144,16 @@ class User(UserMixin, db.Model):
         db.session.add(self)
 
     def gravatar(self,  size=100, default='identicon', rating='g'):
-        if request.is_secure:
-            url = 'https://secure.gravatar.com/avatar'
+        if self.avatar_local_url != None:
+            return self.avatar_local_url
         else:
-            url = 'https://www.gravatar.com/avatar'
-        hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
-        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
-            url=url, hash=hash, size=size, default=default, rating=rating)
+            if request.is_secure:
+                url = 'https://secure.gravatar.com/avatar'
+            else:
+                url = 'https://www.gravatar.com/avatar'
+            hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
+            return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+                url=url, hash=hash, size=size, default=default, rating=rating)
 
     # 从数据库取出头像有问题。
     # def gavatar_local(self):
@@ -223,6 +226,7 @@ class User(UserMixin, db.Model):
                 db.session.add(user)
                 db.session.commit()
 
+db.event.listen(User.avatar_local_url, 'set', User.gravatar)
 
 @login_manager.user_loader
 def load_user(user_id):

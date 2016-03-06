@@ -47,11 +47,8 @@ def index():
     # , form=form, name=session.get('name'), known=session.get('known', False))
 
 
-aurl = None
-
 @main.route('/user/<username>')
 def user_page(username):
-    global aurl
     detail_show = False
     user = User.query.filter_by(username=username).first_or_404()
     title = str(user.username)
@@ -63,7 +60,7 @@ def user_page(username):
         error_out=False)
     posts = pagination.items
     return render_template('user.html', user=user, title=title,
-                           posts=posts, pagination=pagination, detail_show=detail_show, aurl=aurl)
+                           posts=posts, pagination=pagination, detail_show=detail_show)
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -401,7 +398,10 @@ def upload_avatar():
         if file and allowed_file(file.filename):
             files = file.read()
             bucket.put_object(file.filename, files)
-            aurl = str(bucket.generate_url(file.filename))
+            url = str(bucket.generate_url(file.filename))
+            current_user.avatar_hash = url
+            db.session.add(current_user)
+            db.session.commit()
+            flash(u"头像已修改！")
             return redirect(url_for('main.user_page', username=current_user.username))
-            # return redirect(url_for('main.user_page', username=current_user.username))
     return render_template('upload_avatar.html', user=current_user)

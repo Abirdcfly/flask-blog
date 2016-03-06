@@ -9,7 +9,7 @@
         <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ aurl }}">
 {#        需修改 头像调整大小 二进制文件显示为图片#}
     {% else %}
-    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
+    <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.gravatar }}">
     {% endif %}
     <div class="profile-header">
         <h1>{{ user.username }}</h1>
@@ -51,7 +51,7 @@
 
         {% if user == current_user %}
             <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">编辑个人资料</a>
-            <a class="btn btn-default" href="{{ url_for('main.upload_avatar') }}">修改头像</a>
+            <a class="btn btn-default" href="{{ url_for('main.upload_avatar') }}">上传头像</a>
         {% endif %}
         {% if current_user.is_administrator() %}
             <a class="btn btn-danger"
