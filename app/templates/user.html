@@ -3,7 +3,7 @@
 
 {% block page_content %}
     <div class="page-header">
-        <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.avatar() }}">
+        <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.gravatar() }}">
         <div class="profile-header">
             <h1>{{ user.username }}</h1>
             <h3>{% if user.about_me %}{{ user.about_me }}{% endif %}</h3>
