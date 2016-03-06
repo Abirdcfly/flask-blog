@@ -143,11 +143,10 @@ class User(UserMixin, db.Model):
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
-        
-    @staticmethod
+
     def gravatar(self,  size=100, default='identicon', rating='g'):
         if self.avatar_local_url != None:
-            return current_user.avatar_local_url
+            return self.avatar_local_url
         else:
             if request.is_secure:
                 url = 'https://secure.gravatar.com/avatar'
@@ -228,7 +227,7 @@ class User(UserMixin, db.Model):
                 db.session.add(user)
                 db.session.commit()
 
-db.event.listen(User.avatar_local_url, 'set', User.gravatar)
+# db.event.listen(User.avatar_local_url, 'set', User.gravatar)
 
 @login_manager.user_loader
 def load_user(user_id):
