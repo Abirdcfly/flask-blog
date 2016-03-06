@@ -28,10 +28,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.doc') }}"><i class="fa fa-book "></i>  文章</a></li>
-                <li><a href="{{ url_for('main.res_mods') }}">插件</a></li>
-                <li><a href="{{ url_for('main.hd') }}">活动</a></li>
-                <li><a href="{{ url_for('main.video') }}">视频</a></li>
-                <li><a href="{{ url_for('main.about') }}">关于</a></li>
+                <li><a href="{{ url_for('main.res_mods') }}"><i class="fa fa-cloud-download"></i>  插件</a></li>
+                <li><a href="{{ url_for('main.hd') }}"><i class="fa fa-gamepad"></i></i>  活动</a></li>
+                <li><a href="{{ url_for('main.video') }}"><i class="fa fa-video-camera"></i>  视频</a></li>
+                <li><a href="{{ url_for('main.about') }}"><i class="fa fa-info-circle"></i>  关于</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.can(Permission.MODERATE_COMMENTS) %}
@@ -45,13 +45,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('auth.change_password') }}">
-                            <span class="glyphicon glyphicon-wrench">  修改密码</span></a></li>
+                            <i class="fa fa-wrench"></i>  修改密码</a></li>
                         <li><a href="{{ url_for('auth.change_email') }}">
-                            <span class="glyphicon glyphicon-envelope">  修改邮箱</span></a></li>
+                            <i class="fa fa-envelope"></i>  修改邮箱</a></li>
                         <li><a href="{{ url_for('main.user_page', username=current_user.username) }}">
-                            <span class="glyphicon glyphicon-user">  个人信息</span></a></li>
+                            <i class="fa fa-user"></i>  个人信息</a></li>
                         <li><a href="{{ url_for('auth.logout') }}">
-                            <span class="glyphicon glyphicon-off">  登出</span></a></li>
+                            <i class="fa fa-power-off"></i>  登出</a></li>
                     </ul>
                 </li>
                 {% else %}

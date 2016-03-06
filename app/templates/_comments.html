@@ -27,9 +27,13 @@
             {% if moderate %}
                 <br>
                 {% if comment.disabled %}
-                <a class="btn btn-default btn-xs" href="{{ url_for('main.moderate_enable', id=comment.id, page=page) }}">可见</a>
+                    <a class="btn btn-default btn-xs"
+                       href="{{ url_for('main.moderate_enable', id=comment.id, page=page) }}"><i class="fa fa-eye"></i>
+                        可见</a>
                 {% else %}
-                <a class="btn btn-danger btn-xs" href="{{ url_for('main.moderate_disable', id=comment.id, page=page) }}">屏蔽</a>
+                    <a class="btn btn-danger btn-xs"
+                       href="{{ url_for('main.moderate_disable', id=comment.id, page=page) }}"><i class="fa fa-ban"></i>
+                        屏蔽</a>
                 {% endif %}
             {% endif %}
         </div>
