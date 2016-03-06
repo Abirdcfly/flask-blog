@@ -144,7 +144,7 @@ class User(UserMixin, db.Model):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
     # 不加 property 会有奇妙的事情发生哦
-    
+
     def gravatar(self,  size=100, default='identicon', rating='g'):
         if self.avatar_local_url != None:
             return self.avatar_local_url
