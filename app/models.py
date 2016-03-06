@@ -88,6 +88,8 @@ class User(UserMixin, db.Model):
                                 backref=db.backref('followed', lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
+    # avatar_local = db.Column(db.LargeBinary(1024*1024))
+    # avatar_local_name = db.Column(db.String(128))
 
     @property
     def password(self):
@@ -149,6 +151,25 @@ class User(UserMixin, db.Model):
         hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
         return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
             url=url, hash=hash, size=size, default=default, rating=rating)
+
+    # 从数据库取出头像有问题。
+    # def gavatar_local(self):
+    #     import io
+    #     from flask import send_file, make_response
+    #     # temp = object.get(self.avatar_local).read()
+    #     # temp = self.avatar_local
+    #     # from app import Obj
+    #     #
+    #     #
+    #     # obj = Obj.objects.get(title='Logo')
+    #
+    #     # return send_file(io.BytesIO(obj.logo.read()),
+    #     #              )
+    #     response = make_response(self.avatar_local)
+    #     response.headers['Content-Type'] = 'image/jpeg'
+    #     response.headers['Content-Disposition'] = 'attachment; filename=img.jpg'
+    #     return response
+    #     # return send_file(io.BytesIO(self.avatar_local), mimetype='image/png/gif')#attachment_filename='logo.png',
 
     @staticmethod
     def generate_fake(count=100):

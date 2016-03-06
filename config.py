@@ -14,7 +14,8 @@ class Config():
     WOTER_FOLLOWERS_PER_PAGE = 30
     WOTER_COMMENTS_PER_PAGE = 30
 
-
+    ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+    # avatar
 
     @staticmethod
     def init_app(app):

@@ -3,7 +3,12 @@
 
 {% block page_content %}
 <div class="page-header">
+    {% if user.avatar_local != None %}
+    <img class="img-rounded profile-thumbnail" src="{{ user.gavatar_local }}">
+{#        需修改 头像调整大小 二进制文件显示为图片#}
+    {% else %}
     <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
+    {% endif %}
     <div class="profile-header">
         <h1>{{ user.username }}</h1>
         <h3>{% if user.about_me %}{{ user.about_me }}{% endif %}</h3>
@@ -43,7 +48,8 @@
         </p>
 
         {% if user == current_user %}
-            <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">编辑个人资料</a>
+            <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">编辑个人资料</a>
+            <a class="btn btn-default" href="{{ url_for('main.upload_avatar') }}">修改头像</a>
         {% endif %}
         {% if current_user.is_administrator() %}
             <a class="btn btn-danger"
@@ -53,8 +59,11 @@
         {% endif %}
     </div>
 </div>
+        {% block edit_avatar %}
+    {% endblock %}
 <h3>他的文章</h3>
-{% include '_doc.html' %}
+{% include '_doc.html'%}
+{#        需要修改位置和CSS 并用栅格系统 #}
 {% if pagination %}
 <div class="pagination">
     {{ macros.pagination_widget(pagination, 'main.user_page', username=user.username) }}

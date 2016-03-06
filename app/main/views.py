@@ -346,7 +346,7 @@ def ckeditor_post():
 @main.route('/ckupload/', methods=['POST', 'OPTIONS'])
 def ckupload():
     """file/img upload interface"""
-    form = PostForm()
+    form = CkeditorPostForm()
     # response = form.upload(endpoint=app)
     # return response
     form.upload(endpoint=main)
@@ -366,3 +366,35 @@ def markdown_post():
         flash(u'已提交！')
         return redirect(url_for('.doc'))
     return render_template('post.html', title=title, form=form)
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
+
+# 存入数据库，可以用= = 然而我的读取还有问题。
+# @main.route('/upload', methods=['GET', 'POST'])
+# def upload_avatar():
+#     if request.method == 'POST':
+#         file = request.files['file']
+#         if file and allowed_file(file.filename):
+#             current_user.avatar_local = file.read()
+#             db.session.add(current_user)
+#             db.session.commit()
+#             return redirect(url_for('main.user_page', username=current_user.username))
+#     return render_template('upload_avatar.html', user=current_user)
+
+
+# 存储头像到SAE storage
+from sae.storage import Bucket
+bucket = Bucket('avatar')
+
+
+@main.route('/upload', methods=['GET', 'POST'])
+def upload_avatar():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            bucket.put_object(file, open(__file__, 'rb'))
+            return redirect(url_for('main.user_page', username=current_user.username))
+    return render_template('upload_avatar.html', user=current_user)

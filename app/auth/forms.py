@@ -41,3 +41,12 @@ class ChangePasswordForm(Form):
 class ChangeEmailForm(Form):
     email = StringField(u'新邮箱', validators=[Required(), Length(1, 64), Email()])
     submit = SubmitField(u'确定')
+
+
+# class ChangeAvatarForm(Form):
+#     avatar =
+
+    # def allowed_file(filename):
+    # return '.' in filename and \
+    #        filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+

@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from flask import render_template, redirect, request, url_for, flash
-from flask.ext.login import login_user, logout_user, login_required,  current_user
+from flask.ext.login import login_user, logout_user, login_required,  current_user, current_app
 from . import auth
 from ..models import User
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, ChangeEmailForm
@@ -122,3 +122,8 @@ def before_request():
         if not current_user.confirmed \
                 and request.endpoint[:5] != 'auth.':
             return redirect(url_for('auth.unconfirmed'))
+
+
+
+
+
