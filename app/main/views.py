@@ -48,8 +48,7 @@ def index():
 
 
 @main.route('/user/<username>')
-def user_page(username):
-    url = None
+def user_page(username, url=None):
     detail_show = False
     user = User.query.filter_by(username=username).first_or_404()
     title = str(user.username)
