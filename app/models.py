@@ -8,6 +8,7 @@ from datetime import datetime
 import hashlib
 from markdown import markdown
 import bleach
+from flask.ext.login import  current_user
 
 
 class Follow(db.Model):
@@ -145,7 +146,7 @@ class User(UserMixin, db.Model):
 
     def gravatar(self,  size=100, default='identicon', rating='g'):
         if self.avatar_local_url != None:
-            return '' + self.avatar_local_url
+            return current_user.avatar_local_url
         else:
             if request.is_secure:
                 url = 'https://secure.gravatar.com/avatar'

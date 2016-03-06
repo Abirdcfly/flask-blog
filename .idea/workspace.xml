@@ -71,8 +71,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37828946">
-              <caret line="147" column="45" selection-start-line="147" selection-start-column="45" selection-end-line="147" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.30592105">
+              <caret line="148" column="48" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
               <folding>
                 <element signature="e#23#96#0" expanded="true" />
               </folding>
@@ -84,10 +84,8 @@
         <entry file="file://$PROJECT_DIR$/app/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="403" column="31" selection-start-line="403" selection-start-column="31" selection-end-line="403" selection-end-column="31" />
-              <folding>
-                <element signature="e#23#134#0" expanded="true" />
-              </folding>
+              <caret line="8" column="56" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,8 +93,8 @@
       <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/user.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.0">
-              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+            <state vertical-scroll-proportion="-3.0">
+              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -1151,14 +1149,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/_comments.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9259257">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/followers.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.0">
@@ -1191,10 +1181,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/_comments.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.0">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        <state vertical-scroll-proportion="-3.0">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1202,17 +1200,15 @@
     <entry file="file://$PROJECT_DIR$/app/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="403" column="31" selection-start-line="403" selection-start-column="31" selection-end-line="403" selection-end-column="31" />
-          <folding>
-            <element signature="e#23#134#0" expanded="true" />
-          </folding>
+          <caret line="8" column="56" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37828946">
-          <caret line="147" column="45" selection-start-line="147" selection-start-column="45" selection-end-line="147" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.30592105">
+          <caret line="148" column="48" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
           <folding>
             <element signature="e#23#96#0" expanded="true" />
           </folding>
