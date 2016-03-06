@@ -399,7 +399,7 @@ def upload_avatar():
             files = file.read()
             bucket.put_object(file.filename, files)
             url = str(bucket.generate_url(file.filename))
-            current_user.avatar_hash = url
+            current_user.avatar_local_url = url
             db.session.add(current_user)
             db.session.commit()
             flash(u"头像已修改！")
