@@ -143,7 +143,7 @@ class User(UserMixin, db.Model):
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
-     @property
+    @property
     def gravatar(self,  size=100, default='identicon', rating='g'):
         if self.avatar_local_url != None:
             return self.avatar_local_url
