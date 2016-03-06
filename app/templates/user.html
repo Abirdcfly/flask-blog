@@ -4,9 +4,9 @@
 {% block page_content %}
 <div class="page-header">
 {#    {% if user.avatar_local != None %}#}
-    {% if url != None %}
+    {% if aurl != None %}
 {#    <img class="img-rounded profile-thumbnail" src="{{ user.gavatar_local_url }}">#}
-        <img class="img-rounded profile-thumbnail" src="{{ url }}">
+        <img class="img-rounded profile-thumbnail" src="{{ aurl }}">
 {#        需修改 头像调整大小 二进制文件显示为图片#}
     {% else %}
     <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
