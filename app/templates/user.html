@@ -11,7 +11,7 @@
             <p>
             {% if user.nickname %}昵称： {{ user.nickname }} {% endif %}
             <br>
-            {% if user.location %}来自 <a href="http://maps.baidu.com/?q={{ user.location }}">{{ user.location }}</a>
+            {% if user.location %}来自 <a href="http://maps.baidu.com/?q={{ user.location }}" target="_blank">{{ user.location }}</a>
             {% endif %}
             </p>
         {% endif %}

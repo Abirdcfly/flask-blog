@@ -5,9 +5,12 @@
     min-height: 260px;
     margin-left: 280px;
 }
-body{
+body {
     padding-top: 80px;
     background-color: whitesmoke;
+}
+a {
+    text-decoration:none;
 }
 div.navbar-default {
     background-color: #444444;

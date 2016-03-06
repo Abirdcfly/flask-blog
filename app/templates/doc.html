@@ -8,9 +8,9 @@
 {% if current_user.is_authenticated %}
 {#    <a class="btn btn-info" href="{{ url_for('main.post') }}">创建文章</a>#}
 
-    <div class="dropdown">
+    <div class="dropdown" >
         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <a href="{{ url_for('main.ckeditor_post') }}">创建文章</a>
+            <a href="{{ url_for('main.ckeditor_post') }}" style="">创建文章</a>
         <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
