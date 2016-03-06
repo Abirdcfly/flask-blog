@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25a1be8f-2016-4702-9e0e-717d86f2d62d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/_comments.html" afterPath="$PROJECT_DIR$/app/templates/_comments.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/_doc.html" afterPath="$PROJECT_DIR$/app/templates/_doc.html" />
     </list>
@@ -102,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/app/templates/_doc.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-5.0">
-              <caret line="5" column="116" selection-start-line="5" selection-start-column="116" selection-end-line="5" selection-end-column="116" />
+              <caret line="5" column="114" selection-start-line="5" selection-start-column="114" selection-end-line="5" selection-end-column="114" />
               <folding />
             </state>
           </provider>
@@ -112,7 +111,7 @@
         <entry file="file://$PROJECT_DIR$/app/templates/_comments.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.2788296">
-              <caret line="6" column="58" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
+              <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -187,8 +186,8 @@
         <option value="$PROJECT_DIR$/app/templates/doc.html" />
         <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/app/templates/_doc.html" />
         <option value="$PROJECT_DIR$/app/templates/_comments.html" />
+        <option value="$PROJECT_DIR$/app/templates/_doc.html" />
       </list>
     </option>
   </component>
@@ -1149,7 +1148,7 @@
     <entry file="file://$PROJECT_DIR$/app/templates/_doc.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.0">
-          <caret line="5" column="116" selection-start-line="5" selection-start-column="116" selection-end-line="5" selection-end-column="116" />
+          <caret line="5" column="114" selection-start-line="5" selection-start-column="114" selection-end-line="5" selection-end-column="114" />
           <folding />
         </state>
       </provider>
@@ -1157,7 +1156,7 @@
     <entry file="file://$PROJECT_DIR$/app/templates/_comments.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2788296">
-          <caret line="6" column="58" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
           <folding />
         </state>
       </provider>
