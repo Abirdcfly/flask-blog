@@ -347,8 +347,8 @@ def ckeditor_post():
 def ckupload():
     """file/img upload interface"""
     form = CkeditorPostForm()
-    # response = form.upload(endpoint=app)
-    # return response
+    response = form.upload(endpoint=current_app)
+
     form.upload(endpoint=main)
 
 

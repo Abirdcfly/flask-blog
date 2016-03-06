@@ -9,6 +9,7 @@
 <link rel="icon" href="{{ url_for('static', filename = 'WOTER.ico') }}"
           type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block navbar %}
@@ -78,6 +79,7 @@
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
+
 {% endblock %}
 
 
