@@ -33,7 +33,7 @@
 {% include '_doc.html' %}
 </div>
 {% if detail_show == True %}
-    <h4 id="comments">评论</h4>
+    <h4 id="comments"><li class="fa fa-comments fa-2x"></li>  评论</h4>
     {% if current_user.can(Permission.COMMENT) %}
     <div class="comment-form">
         {{ wtf.quick_form(form) }}
