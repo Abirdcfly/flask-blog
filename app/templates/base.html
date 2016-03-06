@@ -27,7 +27,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.doc') }}">文章</a></li>
+                <li><a href="{{ url_for('main.doc') }}"><i class="fa fa-book fa-2x"></i>文章</a></li>
                 <li><a href="{{ url_for('main.res_mods') }}">插件</a></li>
                 <li><a href="{{ url_for('main.hd') }}">活动</a></li>
                 <li><a href="{{ url_for('main.video') }}">视频</a></li>
@@ -35,7 +35,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.can(Permission.MODERATE_COMMENTS) %}
-                <li><a href="{{ url_for('main.moderate') }}">管理评论</a></li>
+                <li><a href="{{ url_for('main.moderate') }}"><i class="fa fa-cogs fa-2x"></i>管理评论</a></li>
                 {% endif %}
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
