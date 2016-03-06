@@ -397,7 +397,7 @@ def upload_avatar():
         if file and allowed_file(file.filename):
             files = file.read()
             bucket.put_object(file.filename, files)
-            aurl = bucket.generate_url(file.filename)
+            aurl = str(bucket.generate_url(file.filename))
             return redirect(url_for('main.user_page', username=current_user.username, aurl=aurl))
             # return redirect(url_for('main.user_page', username=current_user.username))
     return render_template('upload_avatar.html', user=current_user)
