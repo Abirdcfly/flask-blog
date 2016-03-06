@@ -103,8 +103,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.19901316">
-              <caret line="394" column="16" selection-start-line="394" selection-start-column="16" selection-end-line="394" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.6447368">
+              <caret line="417" column="86" selection-start-line="417" selection-start-column="86" selection-end-line="417" selection-end-column="86" />
               <folding>
                 <element signature="e#23#134#0" expanded="true" />
               </folding>
@@ -116,7 +116,7 @@
         <entry file="file://C:/Python27/Lib/site-packages/sae_python_dev-1.3.6-py2.7.egg/sae/storage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding>
                 <element signature="e#76#85#0" expanded="true" />
               </folding>
@@ -1179,7 +1179,7 @@
     <entry file="file://C:/Python27/Lib/site-packages/sae_python_dev-1.3.6-py2.7.egg/sae/storage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
             <element signature="e#76#85#0" expanded="true" />
           </folding>
@@ -1188,8 +1188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.19901316">
-          <caret line="394" column="16" selection-start-line="394" selection-start-column="16" selection-end-line="394" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.6447368">
+          <caret line="417" column="86" selection-start-line="417" selection-start-column="86" selection-end-line="417" selection-end-column="86" />
           <folding>
             <element signature="e#23#134#0" expanded="true" />
           </folding>
