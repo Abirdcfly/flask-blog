@@ -145,7 +145,7 @@ class User(UserMixin, db.Model):
 
     def gravatar(self,  size=100, default='identicon', rating='g'):
         if self.avatar_local_url != None:
-            return self.avatar_local_url
+            return self.avatar_local_url.read()
         else:
             if request.is_secure:
                 url = 'https://secure.gravatar.com/avatar'
