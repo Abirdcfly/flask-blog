@@ -47,8 +47,11 @@ def index():
     # , form=form, name=session.get('name'), known=session.get('known', False))
 
 
+aurl = None
+
 @main.route('/user/<username>')
-def user_page(username, aurl=None):
+def user_page(username):
+    global aurl
     detail_show = False
     user = User.query.filter_by(username=username).first_or_404()
     title = str(user.username)
@@ -392,12 +395,13 @@ bucket = Bucket('avatar')
 
 @main.route('/upload', methods=['GET', 'POST'])
 def upload_avatar():
+    global aurl
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
             files = file.read()
             bucket.put_object(file.filename, files)
             aurl = str(bucket.generate_url(file.filename))
-            return redirect(url_for('main.user_page', username=current_user.username, aurl=aurl))
+            return redirect(url_for('main.user_page', username=current_user.username))
             # return redirect(url_for('main.user_page', username=current_user.username))
     return render_template('upload_avatar.html', user=current_user)
