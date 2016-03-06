@@ -16,8 +16,8 @@ if os.environ.get('APP_NAME') == None:
 else:
     check = 'production'
 
-# app = create_app(os.getenv('WOTER_CONFIG') or 'production')
-app = create_app(os.getenv('WOTER_CONFIG') or 'development')
+app = create_app(os.getenv('WOTER_CONFIG') or 'production')
+# app = create_app(os.getenv('WOTER_CONFIG') or 'development')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
