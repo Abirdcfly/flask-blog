@@ -143,6 +143,8 @@ class User(UserMixin, db.Model):
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
+    # 不加 property 会有奇妙的事情发生哦
+
     @property
     def gravatar(self,  size=100, default='identicon', rating='g'):
         if self.avatar_local_url != None:
@@ -227,7 +229,7 @@ class User(UserMixin, db.Model):
                 db.session.add(user)
                 db.session.commit()
 
-# db.event.listen(User.avatar_local_url, 'set', User.gravatar)
+
 
 @login_manager.user_loader
 def load_user(user_id):
