@@ -145,30 +145,31 @@ class User(UserMixin, db.Model):
         db.session.add(self)
     # 不加 property 会有奇妙的事情发生哦
 
-    def gravatar(self,  size=100, default='identicon', rating='g'):
-        if self.avatar_local_url != None:
-            return self.avatar_local_url
+    def gravatar(self, size=100, default='identicon', rating='g'):
+        # if self.avatar_local_url != None:
+        #     return self.avatar_local_url
+        # else:
+        if request.is_secure:
+            url = 'https://secure.gravatar.com/avatar'
         else:
-            if request.is_secure:
-                url = 'https://secure.gravatar.com/avatar'
-            else:
-                url = 'https://www.gravatar.com/avatar'
-            hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
-            return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
-                url=url, hash=hash, size=size, default=default, rating=rating)
+            url = 'https://www.gravatar.com/avatar'
+        hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=url, hash=hash, size=size, default=default, rating=rating)
 
-    @property
-    def gravatar(self,  size=100, default='identicon', rating='g'):
-        if self.avatar_local_url != None:
-            return self.avatar_local_url
-        else:
-            if request.is_secure:
-                url = 'https://secure.gravatar.com/avatar'
-            else:
-                url = 'https://www.gravatar.com/avatar'
-            hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
-            return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
-                url=url, hash=hash, size=size, default=default, rating=rating)
+    # 这种解决方法无法兼顾外键传过来的情况
+    # @property
+    # def gravatar(self,  size=100, default='identicon', rating='g'):
+    #     if self.avatar_local_url != None:
+    #         return self.avatar_local_url
+    #     else:
+    #         if request.is_secure:
+    #             url = 'https://secure.gravatar.com/avatar'
+    #         else:
+    #             url = 'https://www.gravatar.com/avatar'
+    #         hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
+    #         return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+    #             url=url, hash=hash, size=size, default=default, rating=rating)
 
     # 从数据库取出头像有问题。
     # def gavatar_local(self):
