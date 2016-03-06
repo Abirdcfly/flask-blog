@@ -26,8 +26,11 @@ div.navbar-collapse ul.nav a{
 div.navbar-default a.navbar-brand:hover{
     color: white;
 }
-div.navbar-collapse ul.nav>li>a:hover{
+div.navbar-collapse ul.nav>li>a:hover {
     color: white;
+}
+.navbar-nav>li>a:focus {
+    color: silver;
 }
 div.navbar-collapse ul.nav li.dropdown ul.dropdown-menu{
     background-color: #444444;
