@@ -1,84 +1,84 @@
-{%  extends "bootstrap/base.html" %}
+{% extends "bootstrap/base.html" %}
 
 {% block title %}{{ title }}-Woter{% endblock %}
 
 {% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename = 'WOTER.ico') }}"
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'WOTER.ico') }}"
           type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename = 'WOTER.ico') }}"
+    <link rel="icon" href="{{ url_for('static', filename = 'WOTER.ico') }}"
           type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
 {% endblock %}
 
 {% block navbar %}
-<div class ="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle"
-                    data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Woter</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.doc') }}"><i class="fa fa-book "></i>  文章</a></li>
-                <li><a href="{{ url_for('main.res_mods') }}"><i class="fa fa-cloud-download"></i>  插件</a></li>
-                <li><a href="{{ url_for('main.hd') }}"><i class="fa fa-gamepad"></i></i>  活动</a></li>
-                <li><a href="{{ url_for('main.video') }}"><i class="fa fa-video-camera"></i>  视频</a></li>
-                <li><a href="{{ url_for('main.about') }}"><i class="fa fa-info-circle"></i>  关于</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.can(Permission.MODERATE_COMMENTS) %}
-                <li><a href="{{ url_for('main.moderate') }}"><i class="fa fa-cogs "></i>  管理评论</a></li>
-                {% endif %}
-                {% if current_user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img width="18" height="18" src="{{ current_user.gravatar }}">
-                        {{ current_user.username }} <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('auth.change_password') }}">
-                            <i class="fa fa-wrench"></i>  修改密码</a></li>
-                        <li><a href="{{ url_for('auth.change_email') }}">
-                            <i class="fa fa-envelope"></i>  修改邮箱</a></li>
-                        <li><a href="{{ url_for('main.user_page', username=current_user.username) }}">
-                            <i class="fa fa-user"></i>  个人信息</a></li>
-                        <li><a href="{{ url_for('auth.logout') }}">
-                            <i class="fa fa-power-off"></i>  登出</a></li>
-                    </ul>
-                </li>
-                {% else %}
-                    <li><a href="{{ url_for('auth.login') }}">登陆</a></li>
-                {% endif %}
-            </ul>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Woter</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('main.doc') }}"><i class="fa fa-book "></i> 文章</a></li>
+                    <li><a href="{{ url_for('main.res_mods') }}"><i class="fa fa-cloud-download"></i> 插件</a></li>
+                    <li><a href="{{ url_for('main.hd') }}"><i class="fa fa-gamepad"></i></i>  活动</a></li>
+                    <li><a href="{{ url_for('main.video') }}"><i class="fa fa-video-camera"></i> 视频</a></li>
+                    <li><a href="{{ url_for('main.about') }}"><i class="fa fa-info-circle"></i> 关于</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                        <li><a href="{{ url_for('main.moderate') }}"><i class="fa fa-cogs "></i> 管理评论</a></li>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img width="18" height="18" src="{{ current_user.gravatar }}">
+                                {{ current_user.username }} <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('auth.change_password') }}">
+                                    <i class="fa fa-wrench"></i> 修改密码</a></li>
+                                <li><a href="{{ url_for('auth.change_email') }}">
+                                    <i class="fa fa-envelope"></i> 修改邮箱</a></li>
+                                <li><a href="{{ url_for('main.user_page', username=current_user.username) }}">
+                                    <i class="fa fa-user"></i> 个人信息</a></li>
+                                <li><a href="{{ url_for('auth.logout') }}">
+                                    <i class="fa fa-power-off"></i> 登出</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">登陆</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
 
-    {% block page_content %}{% endblock %}
-</div>
+        {% block page_content %}{% endblock %}
+    </div>
 {% endblock %}
 
 {% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
+    {{ super() }}
+    {{ moment.include_moment() }}
 
 {% endblock %}
 

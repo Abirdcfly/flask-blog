@@ -5,49 +5,53 @@
 {% endif %}
 
 {% block page_content %}
-{% if current_user.is_authenticated %}
-{#    <a class="btn btn-info" href="{{ url_for('main.post') }}">创建文章</a>#}
+    {% if current_user.is_authenticated %}
 
-    <div class="dropdown" >
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <a href="{{ url_for('main.ckeditor_post') }}" style=""><i class="fa fa-file"></i>  创建文章</a>
-        <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="{{ url_for('main.ckeditor_post') }}">富文本写作</a></li>
-            <li><a href="{{ url_for('main.markdown_post') }}">markdown写作</a></li>
-        </ul>
-    </div>
+        <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                <a href="{{ url_for('main.ckeditor_post') }}" style=""><i class="fa fa-file"></i> 创建文章</a>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="{{ url_for('main.ckeditor_post') }}">富文本写作</a></li>
+                <li><a href="{{ url_for('main.markdown_post') }}">markdown写作</a></li>
+            </ul>
+        </div>
 
     {% else %}
         <p>想发表文章？请 <a href="{{ url_for('auth.login') }}"><strong>登陆</a></strong> 或
             <a href="{{ url_for('auth.register') }}"><strong>注册</strong></a></p>
-{% endif %}
-<div class="post-tabs">
-    <ul class="nav nav-tabs">
-        <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('main.show_all') }}">全部</a></li>
-        {% if current_user.is_authenticated %}
-        <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('main.show_followed') }}">关注者</a></li>
-        {% endif %}
-    </ul>
-{% include '_doc.html' %}
-</div>
-{% if detail_show == True %}
-    <h4 id="comments"><li class="fa fa-comments fa-2x"></li>  评论</h4>
-    {% if current_user.can(Permission.COMMENT) %}
-    <div class="comment-form">
-        {{ wtf.quick_form(form) }}
+    {% endif %}
+    <div class="post-tabs">
+        <ul class="nav nav-tabs">
+            <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('main.show_all') }}">全部</a></li>
+            {% if current_user.is_authenticated %}
+                <li{% if show_followed %} class="active"{% endif %}><a
+                        href="{{ url_for('main.show_followed') }}">关注者</a></li>
+            {% endif %}
+        </ul>
+        {% include '_doc.html' %}
     </div>
+    {% if detail_show == True %}
+        <h4 id="comments">
+            <li class="fa fa-comments fa-2x"></li>
+            评论
+        </h4>
+        {% if current_user.can(Permission.COMMENT) %}
+            <div class="comment-form">
+                {{ wtf.quick_form(form) }}
+            </div>
+        {% endif %}
+        {% include '_comments.html' %}
     {% endif %}
-    {% include '_comments.html' %}
-{% endif %}
-{% if pagination %}
-<div class="pagination">
-    {% if detail_show == False %}
-        {{ macros.pagination_widget(pagination, 'main.doc') }}
-    {% else %}
-        {{ macros.pagination_widget(pagination, 'main.doc', fragment='#comments', id=posts[0].id) }}
+    {% if pagination %}
+        <div class="pagination">
+            {% if detail_show == False %}
+                {{ macros.pagination_widget(pagination, 'main.doc') }}
+            {% else %}
+                {{ macros.pagination_widget(pagination, 'main.doc', fragment='#comments', id=posts[0].id) }}
+            {% endif %}
+        </div>
     {% endif %}
-</div>
-{% endif %}
 {% endblock %}
