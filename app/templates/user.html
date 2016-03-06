@@ -3,14 +3,7 @@
 
 {% block page_content %}
 <div class="page-header">
-{#    {% if user.avatar_local != None %}#}
-    {% if aurl != None %}
-{#    <img class="img-rounded profile-thumbnail" src="{{ user.gavatar_local_url }}">#}
-        <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ aurl }}">
-{#        需修改 头像调整大小 二进制文件显示为图片#}
-    {% else %}
-    <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.gravatar }}">
-    {% endif %}
+    <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.avatar_local_url }}">
     <div class="profile-header">
         <h1>{{ user.username }}</h1>
         <h3>{% if user.about_me %}{{ user.about_me }}{% endif %}</h3>
