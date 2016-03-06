@@ -403,6 +403,6 @@ def upload_avatar():
             db.session.add(current_user)
             db.session.commit()
             flash(u"头像已修改！")
-            return current_user.gravatar
+            return str(current_user.gravatar)
             # return redirect(url_for('main.user_page', username=current_user.username))
     return render_template('upload_avatar.html', user=current_user)
