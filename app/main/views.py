@@ -387,18 +387,7 @@ def allowed_file(filename):
 
 # 存储头像到SAE storage
 from sae.storage import Bucket
-# # s = sae.storage.Client()
 bucket = Bucket('avatar')
-# current_app.config['ACCESS_KEY']=
-
-
-# import sae.const
-# access_key = sae.const.ACCESS_KEY
-# secret_key = sae.const.SECRET_KEY
-# appname = sae.const.APP_NAME
-# domain_name = "avatar"  #刚申请的domain
-
-# import sae.storage
 
 
 @main.route('/upload', methods=['GET', 'POST'])
@@ -406,14 +395,9 @@ def upload_avatar():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            # s = sae.storage.Client()
-            # ob = sae.storage.Object(file.read())
-            # url = s.put(domain_name, file.filename, ob)
-            # return redirect(url)
-            # 上4行 可用。
             files = file.read()
             bucket.put_object(file.filename, files)
-            # bucket.put_object('1.txt', 'hello, world')
-            # bucket.put_object(file, open(__file__, 'rb'))
-            return redirect(url_for('main.user_page', username=current_user.username))
+            url = bucket.generate_url(file.filename)
+            return url
+            # return redirect(url_for('main.user_page', username=current_user.username))
     return render_template('upload_avatar.html', user=current_user)
