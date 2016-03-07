@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding:utf-8 -*-
 import os
 from app import create_app, db
 from app.models import User, Role, Permission, Post, Follow, Comment
@@ -15,9 +16,9 @@ if os.environ.get('APP_NAME') == None:
     check = 'development'
 else:
     check = 'production'
-
-# app = create_app(os.getenv('WOTER_CONFIG') or 'production')
-app = create_app(os.getenv('WOTER_CONFIG') or 'development')
+# 需要手工注释。环境变量判断无效
+app = create_app(os.getenv('WOTER_CONFIG') or 'production')
+# app = create_app(os.getenv('WOTER_CONFIG') or 'development')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
