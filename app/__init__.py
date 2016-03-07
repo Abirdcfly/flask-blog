@@ -42,7 +42,7 @@ def create_app(config_name):
     #     # Extensions like Flask-SQLAlchemy now know what the "current" app
     #     # is while within this block. Therefore, you can now run........
         db.create_all()
-        # deploy()
+        deploy()
 
     return app
 
@@ -52,16 +52,16 @@ def create_app(config_name):
 #     db.create_all()
 
 #
-# def deploy():
-#     """Run deployment tasks."""
-#     from flask.ext.migrate import upgrade
-#     from app.models import Role, User
-#
-#     # migrate database to latest revision
-#     #upgrade()
-#
-#     # create user roles
-#     Role.insert_roles()
-#
-#     # create self-follows for all users
-#     User.add_self_follows()
+def deploy():
+    """Run deployment tasks."""
+    from flask.ext.migrate import upgrade
+    from app.models import Role, User
+
+    # migrate database to latest revision
+    #upgrade()
+
+    # create user roles
+    Role.insert_roles()
+
+    # create self-follows for all users
+    User.add_self_follows()
