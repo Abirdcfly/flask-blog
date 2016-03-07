@@ -1,16 +1,15 @@
 <ul class="comments">
-    <h1>{{ comment.author.avatar_local_url }}</h1>
     {% for comment in comments %}
         <li class="comment">
             <div class="comment-thumbnail">
                 <a href="{{ url_for('main.user_page', username=comment.author.username) }}">
-                    {% if comment.author.avatar_local_url == None %}
-                        <img class="img-rounded profile-thumbnail"
-                             src="{{ comment.author.gravatar(size=40) }}">
-{#                        width="40" height="40"#}
-                    {% else %}
+                    {% if comment.author.avatar_local_url != None %}
                         <img class="img-rounded profile-thumbnail" width="40" height="40"
                              src="{{ comment.author.avatar_local_url }}">
+                    {% else %}
+                        <img class="img-rounded profile-thumbnail"
+                             src="{{ comment.author.gravatar(size=40) }}">
+                        {#                        width="40" height="40"#}
                     {% endif %}
                 </a>
             </div>
