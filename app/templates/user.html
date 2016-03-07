@@ -4,7 +4,7 @@
 {% block page_content %}
     <div class="page-header">
         {% if user.avatar_local_url == None %}
-            <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.gravatar() }}">
+            <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.gravatar(size=256) }}">
         {% else %}
             <img class="img-rounded profile-thumbnail" width="256" height="256" src="{{ user.avatar_local_url }}">
         {% endif %}

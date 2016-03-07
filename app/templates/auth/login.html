@@ -3,13 +3,25 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h1>登陆</h1>
+    <h1><i class="fa fa-send fa-1x"></i>登陆</h1>
 </div>
-<div class="col-md-4">
+
+<div class="col-md-6">
     {{ wtf.quick_form(form) }}
+{#    <div class="input-group input-group-lg">#}
+{#        <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-envelope-o fa-fw"></i></span>#}
+{#        <input class="form-control" type="text" placeholder="Email address">#}
+{#        {{ form.email(placeholder="Email address")}}#}
+{#    </div>#}
+{#    <div class="input-group input-group-lg">#}
+{#        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>#}
+{#        <input class="form-control" type="password" placeholder="Password">#}
+{#        {{ form.password(placeholder="Password") }}#}
+{#    </div>#}
     <br>
     <p>
-    新用户？<a href="{{ url_for('auth.register') }}">点此注册</a>
+    新用户？<a href="{{ url_for('auth.register') }}"><i class="fa fa-plus"></i>  点此注册</a>
     </p>
 </div>
+
 {% endblock %}

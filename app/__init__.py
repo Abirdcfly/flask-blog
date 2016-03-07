@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from flask import Flask, current_app
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.mail import Mail
@@ -43,6 +44,7 @@ def create_app(config_name):
     #     # is while within this block. Therefore, you can now run........
         db.create_all()
         deploy()
+        # 注意 不能省去以上2行代码
 
     return app
 
