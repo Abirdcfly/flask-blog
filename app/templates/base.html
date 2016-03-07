@@ -40,7 +40,11 @@
                     {% if current_user.is_authenticated %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img width="18" height="18" src="{{ current_user.gravatar() }}">
+                                {% if current_user.avatar_local_url == None %}
+                                    <img width="18" height="18" src="{{ current_user.gravatar() }}">
+                                {% else %}
+                                    <img width="18" height="18" src="{{ current_user.avatar_local_url }}">
+                                {% endif %}
                                 {{ current_user.username }} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">

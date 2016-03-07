@@ -3,8 +3,13 @@
         <li class="comment">
             <div class="comment-thumbnail">
                 <a href="{{ url_for('main.user_page', username=comment.author.username) }}">
-                    <img class="img-rounded profile-thumbnail" width="40" height="40"
-                         src="{{ comment.author.gravatar() }}">
+                    {% if comment.author.avatar_local_url == None %}
+                        <img class="img-rounded profile-thumbnail" width="40" height="40"
+                             src="{{ comment.author.gravatar() }}">
+                    {% else %}
+                        <img class="img-rounded profile-thumbnail" width="40" height="40"
+                             src="{{ comment.author.avatar_local_url }}">
+                    {% endif %}
                 </a>
             </div>
             <div class="comment-content">
